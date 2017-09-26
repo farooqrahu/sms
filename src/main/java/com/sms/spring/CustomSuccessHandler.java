@@ -52,7 +52,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 			roles.add(a.getAuthority());
 		}
 
-		if (isIfgOwner(roles) || isSaleManager(roles) || isDataEntry(roles) || isSaleRep(roles)
+		if (isOwner(roles) || isSaleManager(roles) || isDataEntry(roles) || isSaleRep(roles)
 				|| isWareHouseManager(roles)) {
 			logger.info("User has Logged In Successfully.");
 			User user = Utility.getLoggedInUser();
@@ -81,7 +81,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 		return redirectStrategy;
 	}
 
-	private boolean isIfgOwner(List<String> roles) {
+	private boolean isOwner(List<String> roles) {
 		if (roles.contains("ROLE_SMS_OWNER")) {
 			return true;
 		}

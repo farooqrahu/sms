@@ -18,8 +18,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @Configuration
 @ComponentScan(basePackages = {
-		"com.ifg.spring" }, excludeFilters = @ComponentScan.Filter(type = FilterType.REGEX, pattern = {
-				"com.ifg.spring.web.*" }))
+		"com.sms.spring" }, excludeFilters = @ComponentScan.Filter(type = FilterType.REGEX, pattern = {
+				"com.sms.spring.web.*" }))
 @EnableScheduling
 @EnableAspectJAutoProxy
 @EnableCaching

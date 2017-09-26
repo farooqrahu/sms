@@ -27,13 +27,13 @@ import org.springframework.web.servlet.view.jasperreports.JasperReportsMultiForm
 import org.springframework.web.servlet.view.jasperreports.JasperReportsViewResolver;
 
 @Configuration
-@ComponentScan(basePackages = { "com.ifg.spring.web" })
+@ComponentScan(basePackages = { "com.sms.spring.web" })
 @EnableWebMvc
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	private int maxUploadSizeInMb = 3 * 1024 * 1024; // 3 MB
 
-	@Value("${com.ifg.spring.path}")
+	@Value("${com.sms.spring.path}")
 	private String path;
 
 	@Override
@@ -147,14 +147,14 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	@Bean(name = "messageSource")
 	public MessageSource messageSource() {
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-		// messageSource.setBasename("/i18n/ifgmsg");
-		messageSource.setBasename("classpath:i18n/ifgmsg");
+		// messageSource.setBasename("/i18n/smsmsg");
+		messageSource.setBasename("classpath:i18n/sms_msg");
 		messageSource.setDefaultEncoding("UTF-8");
 		/*
 		 * ResourceBundleMessageSource result = new
 		 * ResourceBundleMessageSource();
 		 * 
-		 * String[] basenames = { "classpath:/i18n.ifgmsg", "classpath:messages"
+		 * String[] basenames = { "classpath:/i18n.sms_msg", "classpath:messages"
 		 * }; result.setDefaultEncoding("UTF-8");
 		 * result.setBasenames(basenames);
 		 */
