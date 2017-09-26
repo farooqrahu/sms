@@ -1,0 +1,61 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body class="fixed-left" style="background-image: url(images/bg1.jpg)">
+	<!-- Begin page -->
+	<div id="wrapper">
+
+		<!-- ============================================================== -->
+		<!-- Start right Content here -->
+		<!-- ============================================================== -->
+		<div class="content-page">
+			<!-- Start content -->
+			<div class="content">
+				<div
+					class="mdl-color--pink ml-header relative clear fadeInLeft animated"
+					style="min-height: 100%; margin-left: -5px; margin-top: -20px;">
+					<div class="p-20"></div>
+				</div>
+				<div class="ml-card-holder cards-top  container"
+					style="margin-top: -100px;">
+					<div class="row">
+						<div class="col-sm-12 pad">
+							<div class="card-box" style="padding: 15%;">
+								<!-- <h1 style="text-align:center;">Order Form Successfully forwarded to Warehouse!</h1> -->
+								<!-- Put your Text here-->
+								<div class="container">
+									<h1>
+										Resource not found <span>:(</span>
+									</h1>
+									<p>Sorry, but the page you were trying to view does not
+										exist.</p>
+									<p>It looks like this was the result of either:</p>
+									<a th:href="@{/logout}" href="logout"> Logout </a><br /> <a
+										th:href="@{/index}" href="index"> Home </a>
+									<h4 th:inline="text">Please contact the operator with the
+										above information.</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+
+	</div>
+	<!-- container -->
+
+
+	<!-- content -->
+
+
+
+
+	
+	<!-- END wrapper -->
+
+	
+</body>
+</html>

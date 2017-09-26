@@ -1,0 +1,701 @@
+
+
+<div th:fragment="ordermodal">
+	<form role="form" th:action="@{/editRequestDetail}" th:object="${entity}"
+		method="POST">
+		<div class="modal-dialog modal-full">
+			<div class="col-sm-12 pad">
+				<div class="card-box slimScrollDiv">
+					<h1 style="text-align: center;">Add Order Request</h1>
+					<div id="table" class="table-editable">
+						<table id="ordercreation"
+							class="table table-striped table-bordered tg dataTable no-footer">
+							<input type="hidden" id="orderRequestInputId"   th:field="*{orderRequest.orderRequestId}" >
+							<tr>
+								<th id="productName" class="tg-yw4l"
+									style="border-top-left-radius: 20px;">Article</th>
+								<th id="color" class="tg-yw4l">Color</th>
+								<th id="cup" class="tg-yw4l">Cup</th>
+								<th id="S30_65" class="tg-yw4l" style="">30/65</th>
+								<th id="s32_70" class="tg-yw4l" style="">32/70</th>
+								<th id="s34_75" class="tg-yw4l" style="">34/75</th>
+								<th id="S36_80" class="tg-yw4l" style="">36/80</th>
+								<th id="S38_85" class="tg-yw4l" style="">38/85</th>
+								<th id="S40_90" class="tg-yw4l" style="">40/90</th>
+								<th id="S42_95" class="tg-yw4l" style="">42/95</th>
+								<th id="S44_100" class="tg-yw4l" style="">44/100</th>
+								<th id="S36_105" class="tg-yw4l" style="">46/105</th>
+								<th id="totQuantity" class="tg-yw4l" style="">Total
+									Quantity</th>
+
+							</tr>
+
+
+							<tr>
+								<td class="tg-yw4l" id="productNameId" style="max-width: 153px;"><select
+									th:field="*{orderRequestDetail.productName.productNameId}"
+								
+									class="form-control articleClassa select2 dropdown-toggle btn-custom2">
+										<option value="">Select</option>
+										<option th:each="productNameList : ${productNameList}"
+										 th:value="${productNameList.productNameId}"
+											th:text="${productNameList.name}"></option>
+								</select></td>
+
+								<td class="tg-yw4l" style="max-width: 110px;"><select disabled="disabled"
+									class="form-control" id="colorNameId"
+									th:field="*{orderRequestDetail.color.colorId}" 
+									class="form-control colorClassa select2 dropdown-toggle btn-custom2">
+									
+								</select></td>
+								<td class="tg-yw4l select" style="max-width: 90px;"><select disabled="disabled"
+									class="form-control" id="cupName"
+									th:field="*{orderRequestDetail.cup.cupId}" 
+									class="form-control cupClassa select2 dropdown-toggle btn-custom2">
+										</select></td>
+
+								<td class="tg-yw4l" >
+								<input style="max-width: 32px;" disabled="disabled"
+									id="add1" class="size 30a rowValuea" 
+									th:field="*{orderRequestDetail.s30_65}" type="text"
+									maxlength="3">
+									</td>
+								<td class="tg-yw4l">
+									<input style="max-width: 32px;"  disabled="disabled"
+									id="add2" class="size 32a rowValuea" 
+									th:field="*{orderRequestDetail.s32_70}" type="text" 
+									maxlength="3">
+									</td>
+								<td class="tg-yw4l">
+								<input style="max-width: 32px;"  disabled="disabled"
+									id="add3" class="size 34a rowValuea"
+									th:field="*{orderRequestDetail.s34_75}" type="text"
+									maxlength="3">
+								</td>
+								<td class="tg-yw4l">
+								<input style="max-width: 32px;" disabled="disabled"
+									id="add3" class="size 36a rowValuea" 
+									th:field="*{orderRequestDetail.s36_80}" type="text"
+									maxlength="3">	
+							
+									</td>
+								<td class="tg-yw4l">
+								<input style="max-width: 32px;" disabled="disabled"
+									id="add5" class="size 38a rowValuea"
+									th:field="*{orderRequestDetail.s38_85}" type="text"
+									maxlength="3">
+									</td>
+								<td class="tg-yw4l">
+								<input style="max-width: 32px;" disabled="disabled"
+									id="add6" class="size 40a rowValuea" 
+									th:field="*{orderRequestDetail.s40_90}" type="text" 
+									maxlength="3">
+								</td>
+								<td class="tg-yw4l">
+								<input style="max-width: 32px;" disabled="disabled"
+									id="add7" class="size 42a rowValuea" 
+									th:field="*{orderRequestDetail.s42_95}" type="text" 
+									maxlength="3">
+									</td>
+								<td class="tg-yw4l">
+								<input style="max-width: 32px;" disabled="disabled"
+									id="add8" class="size 44a rowValuea" th:if="*{orderRequestDetail.s44_100==null}" 
+									th:field="*{orderRequestDetail.s44_100}" type="text"
+									maxlength="3">
+									</td>
+								<td class="tg-yw4l">
+								<input style="max-width: 32px;" disabled="disabled" th:if="*{orderRequestDetail.s46_105==null}" 
+									id="add9" class="size 46a rowValuea"
+									th:field="*{orderRequestDetail.s46_105}" type="text"
+									maxlength="3">
+								</td>
+								<td id="" class="tg-yw4l totalValuea totala" ><input disabled="disabled"
+									type="text" id="" class="totaladd" disabled="disabled" 
+									style="max-width: 45px;" id=""
+									th:field="*{orderRequestDetail.totalQuantity}">
+								
+								</td>
+
+							</tr>
+						</table>
+
+					</div>
+
+					<div class="row concent">
+
+						<div class="col-md-6">
+							<button type="button" data-dismiss="modal"
+								onclick="return false;"
+								class="btn btn-4 btn-4b waves-effect icon-arrow-left span3">
+								<span>Cancel</span>
+							</button>
+						</div>
+						<div class="col-md-6">
+							<button type="submit" id="export-btn"
+								class="btn btn-4 btn-4a waves-effect icon-arrow-right span3">
+								<span>Save</span>
+							</button>
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+
+
+			</div>
+
+
+		</div>
+	</form>
+	
+ 	<!-- <script>
+$('.size' ).on("keydown keyup",
+			
+		function() {
+
+			var sum = 0;
+
+			var totalSize = parseInt($(this).closest("tr")
+					.find(".size").val());
+			var total = parseInt($(this).closest("tr")
+						.find(".totala").val());
+			
+			var pricePerPiece = parseInt($(this).closest(
+					"tr").find(".priceperpa").val());
+
+			$(this).closest("tr").find(".size").each(
+					function() {
+						sum += +$(this).val();
+					});
+			//alert(sum);
+			var check = $(this).closest("tr")
+					.find(".totala").val(sum).attr('value',
+							sum);
+			var sumb = sum * pricePerPiece;
+
+			//alert(sumb);
+			var suma = 0;
+			$(".totala").each(function() {
+				suma += +$(this).val();
+			});
+			$(this).closest("tr").find(".totalamount").val(
+					sumb).attr('value', sumb);
+			$("#allTotala").val(suma);
+
+			var grandAmount = 0;
+			$(".totalamounta").each(function() {
+				grandAmount += +$(this).val();
+			});
+			$("#allTotalamounta").val(grandAmount);
+
+		});
+
+$(".articleClassa").change(
+		function() {
+			var a = parseInt($(this).closest("tr").find(
+					".articleClassa").val());
+			var b = $(this).closest("tr").find(
+					".colorClassa");
+			var c = $(this).closest("tr").find(".articleClassa");
+
+			if (a === "") {
+				swal("Please Select an Article", "", "error");
+				return false;
+			} else {
+				var url = "/getColor";
+				var msg = "Color";
+				productSelect(a, url, msg, b);
+				/* swal("Added!", "Category Name Added!", "success"); */
+				$(".colorClassa").removeAttr('disabled');
+			}
+
+		});
+function productSelect(a, url, msg, optId) {
+
+	$
+			.ajax({
+				type : "post",
+				url : url,
+				data : "inputValue=" + a,
+				dataType : 'json',
+				success : function(data) {
+				}
+			})
+			.done(
+					function(data) {
+						if (data != 0) {
+							var colorId = "";
+							var name = "";
+							$(optId).empty();
+							$
+									.each(
+											data,
+											function(i,
+													item) {
+
+												var colorId = item.colorId;
+												var name = item.name;
+												$(optId)
+														.append(
+																$(
+																		'<option value="'+item.colorId+'">')
+																		.text(
+																				item.name)
+																		.attr(
+																				'id',
+																				item.colorId));
+												
+											});
+							
+						} else {
+							swal("", "This product is currently unavailable", "error");
+							//$(".articleClass").prop('selectedIndex', 0);
+						}
+					
+					})
+			.error(
+					function(data) {
+						swal("Oops", "An Error Occured, Please Try Again!",
+								"error");
+					});
+};
+
+$(".colorClassa")
+		.click(
+				function() {
+					var a = parseInt($(this).closest("tr")
+							.find(".articleClassa").val());
+					var b = $(this).closest("tr").find(
+							".cupClassa");
+					
+					if (a === "") {
+						alert('Error');
+						return false;
+					} else {
+						var url = "/getCup";
+						var msg = "Cup";
+						colorSelect(a, url, msg, b);
+						$(".cupClassa").removeAttr('disabled');
+						
+
+					}
+
+				});
+function colorSelect(a, url, msg, optId) {
+
+	$
+			.ajax({
+				type : "post",
+				url : url,
+				data : "inputValue=" + a,
+				dataType : 'json',
+				success : function(data) {
+				}
+			})
+			.done(
+					function(data) {
+
+						if (data != 0) {
+							$(optId).empty();
+							$
+									.each(
+											data,
+											function(i,
+													item) {
+
+												$(optId)
+														.append(
+																$(
+																		'<option value="'+item.cupId+'">')
+																		.text(
+																				item.name)
+																		.attr(
+																				'id',
+																				item.cupId));
+											});
+						} else {
+							swal("", "Please select Article first", "error");
+						//	$(this).closest("tr").find(".colorClass").prop('selectedIndex', 0);
+						}
+					})
+			.error(
+					function(data) {
+						swal("Oops", "An Error Occured, Please Try Again!",
+						"error");
+					});
+};
+$(".cupClassa").click(
+		function() {
+			var articleId = parseInt($(this).closest("tr").find(".articleClassa").val());
+			var colorId = parseInt($(this).closest("tr").find(".colorClassa").val());
+			var cupId = parseInt($(this).closest("tr").find(".cupClassa").val());			
+			var pricePerUnit = $(this).closest("tr").find(".priceperpa");
+			//$(".size, .sizetri").removeAttr('disabled');
+			
+			if (articleId === "") {
+				alert('Error');
+				return false;
+			} else {
+				//var url = "/getPrice";
+				//var msg = "Price";
+				//getPrice(articleId, url, msg,colorId,cupId,pricePerUnit);
+				$(this).closest("tr").find('.size').removeAttr('disabled');
+				$(this).closest("tr").find('.30a, .32a, .34a, .36a, .38a, .40a, .42a, .44a, .46a').trigger("change");
+			}
+
+		
+			
+		});
+$(".30a").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClassa").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClassa").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClassa").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".30a").val());
+			var sizeId = 1;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperpa");
+			var size=30;
+			
+			//var parentTd = $(this).parentNode
+			
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";	
+				
+				quantitycheck(this,$(this).closest("tr").find(".totala"), articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+				
+
+			}
+		});
+
+$(".32a").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClassa").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClassa").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClassa").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".32a").val());
+			var sizeId = 2;
+			var size=32;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperpa");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".totala"), articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+$(".34a").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClassa").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClassa").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClassa").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".34a").val());
+			var sizeId = 3;
+			var size=34;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperpa");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".totala"), articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+$(".36a").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClassa").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClassa").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClassa").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".36a").val());
+			var sizeId = 4;
+			var size=36;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperpa");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".totala"), articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+$(".38a").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClassa").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClassa").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClassa").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".38a").val());
+			var sizeId = 5;
+			var size=38;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperp");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".totala"),articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+$(".40a").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClassa").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClassa").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClassa").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".40a").val());
+			var sizeId = 6;
+			var size=40;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperpa");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".totala"),articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+$(".42a").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClassa").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClassa").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClassa").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".42a").val());
+			var sizeId = 7;
+			var size=42;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperpa");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".totala"),articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+$(".44a").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClassa").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClassa").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClassa").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".44a").val());
+			var sizeId = 8;
+			var size=44;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperpa");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".totala"),articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+		$(".46a").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClassa").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClassa").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClassa").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".46a").val());
+			var sizeId = 9;
+			var size=46;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperpa");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".totala"),articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+		
+	function quantitycheck(tdSize,tdTotal, articleId, url, msg, colorId, cupId,
+		sizeId, sizeVal,size) {		
+
+	$.ajax(
+					{
+						type : "post",
+						url : url,
+						data : "inputValue=" + articleId
+								+ "&colorId=" + colorId
+								+ "&cupId=" + cupId
+								+ "&sizeId=" + sizeId,
+						dataType : 'json',
+						success : function(data) {
+						}
+					})
+			.done(
+					function(data) {
+						//alert(data);
+					
+						if (data != 0) {
+							
+							$(tdSize).removeAttr('disabled');
+							if (sizeVal > data) {
+								swal("LIMIT EXCEEDS", "Sorry, Avaliable Quantity : "+data,
+								"error");	
+								validateQuantity(tdSize,tdTotal,false,tdSize.value);
+								document
+										.getElementById("export-btn").disabled = true;
+								sizeVal = 0;
+							} else
+								document.getElementById("export-btn").disabled = false;
+							//swal("Size:"+size+" available in stock:"+data,"success");
+						} else {
+							//swal("Product Out of Stock", "Sorry, Quantity is unavailable", "error");
+						/* 	alert("Test44"); */
+							$(tdSize).attr('disabled','disabled');
+							validateQuantity(tdSize,tdTotal,false,tdSize.value);
+							$('#sizeId').val('');
+							$('#sizeVal').val('');
+						}
+					})
+			.error(
+					function(data) {
+						swal(
+								"Oops",
+								"We couldn't connect to the server!",
+								"error");
+					});
+	 $(".rowValuea").on("keydown keyup", function() {
+			
+			sumAllSizesa = 0;
+			$(".rowValuea").each(function() {
+				sumAllSizesa += +$(this).val();							
+			});
+			$(this).closest("tr").find(".totaladd").val(sumAllSizesa);
+	
+
+		}); 
+		};
+		
+
+</script> -->
+
+<script>
+function validateQuantity(tdSize,tdTotal,isValid,amount){
+	if(!isValid){	
+		tdSize.value = null;
+		var newVal = tdTotal.val() - amount;
+		tdTotal.val(newVal);
+	}
+}
+</script>
+</div>
+

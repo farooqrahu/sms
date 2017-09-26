@@ -1,0 +1,544 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: header">
+</head>
+<script th:if="${customerEntity.customer.customerId!=null}">
+ 
+	function setPayMethodEdit() {
+	
+		var paymentMethodId = 0;
+		if (document.getElementById("pmAdvance1").checked) {
+			paymentMethodId = document.getElementById("pmAdvance1").value
+		} else if (document.getElementById("pmBank1").checked) {
+			paymentMethodId = document.getElementById("pmBank1").value
+		} else if (document.getElementById("pmCash1").checked) {
+			paymentMethodId = document.getElementById("pmCash1").value
+		} else if (document.getElementById("pmCredit1").checked) {
+			paymentMethodId = document.getElementById("pmCredit1").value
+		} else {
+			paymentMethodId = 0;
+		}
+		document.getElementById("hfPaymentMethod1").value = paymentMethodId;		 
+	/* 	var form = document.getElementById("customerForm");
+		
+		$( form ).submit(function( event ) {
+			  swal( "Handler for .submit() called." );
+			  event.preventDefault();
+			}); */
+		
+
+	}
+</script>
+<body>
+	<!--Customer Modal -->
+	<div id="setmodel" class="custom-modal-text text-left"
+		th:fragment="customer">
+		<form id="customerForm" role="form" th:action="@{/customerlist}"
+			th:object="${customerEntity}" method="POST">
+			<div class="modal-body col-lg-12">
+				<div class="col-md-6">
+					<div class="card-box blue">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="salesrepcode" class="control-label">Sales
+										Rep Code</label> <input readonly="readonly" type="text" maxlength="6"
+										class="form-control" id="salesrepcode"
+										th:field="*{customer.user.employeeId}" placeholder="5214"
+										required="">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="customername" class="control-label">Sales
+										Rep Name</label> <select id="salesrepname"
+										onChange="userCodeFunctionEdit()"
+										th:if="${customerEntity.customer.customerId==null}"
+										class="form-control select2" th:field="*{customer.user.id}">
+										<optgroup>
+											<option value="">Select</option>
+											<option th:each="user : ${userList}" th:value="${user.id}"
+												th:text="${user.name}"></option>
+										</optgroup>
+
+									</select> <input
+										th:readonly="${customerEntity.customer.customerId!=null}"
+										id="salesrepname" name="customer.user.id"
+										th:if="${customerEntity.customer.customerId!=null}"
+										type="hidden" class="form-control"
+										th:field="${customerEntity.customer.user.id}"> <input
+										th:readonly="${customerEntity.customer.customerId!=null}"
+										th:if="${customerEntity.customer.customerId!=null}"
+										type="text" class="form-control"
+										th:field="${customerEntity.customer.user.name}">
+									<!-- 									<select
+								 id="salesrepname" required th:field="*{customer.salesRepresentativeName}" 
+								class="form-control select2 dropdown-toggle btn-custom2" >
+								<option value="">Please Select</option>
+							
+							</select>
+ -->
+								</div>
+							</div>
+							<!--  -->
+						</div>
+						<div class="row"></div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="customerno" class="control-label">Customer
+										No.</label> <input type="text" maxlength="6" class="form-control"
+										id="customerno" th:field="*{customer.code}"
+										th:readonly="${customerEntity.customer.customerId!=null}"
+										placeholder="8922" required="">
+								</div>
+							</div>
+							<!-- -->
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="customername" class="control-label">Customer
+										Name</label> <input type="text" class="form-control" id="customername"
+										th:field="*{customer.name}"
+										th:readonly="${customerEntity.customer.customerId!=null}"
+										placeholder="Doe" required="">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="contactperson" class="control-label">Contact
+										Person</label> <input type="text" class="form-control"
+										id="contactperson" th:field="*{customer.contactPerson}"
+										placeholder="John" required="">
+								</div>
+							</div>
+							<!--  -->
+							<div class="col-md-6" th:if="*{customer.customerId==null}">
+								<div class="form-group">
+									<label for="datepicker-autoclose" class="control-label">Date</label>
+									<input
+										th:readonly="${customerEntity.customer.customerId!=null}"
+										type="text" maxlength="10" class="form-control" id="myDate"
+										th:field="*{creationDate}" placeholder="15/06/2016"
+										required="">
+								</div>
+							</div>
+							<div class="col-md-6" th:if="*{customer.customerId!=null}">
+								<div class="form-group">
+									<label for="datepicker-autoclose" class="control-label">Date</label>
+									<input
+										th:readonly="${customerEntity.customer.customerId!=null}"
+										type="text" maxlength="10" class="form-control"
+										id="myDateEdit" th:field="*{creationDate}"
+										placeholder="15/06/2016" required="">
+								</div>
+							</div>
+
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="customeraddress" class="control-label">Address</label>
+									<input type="text" class="form-control" id="customeraddress"
+										th:field="*{customer.address}"
+										placeholder="L210, 15th Street, Phase 8, DHA">
+								</div>
+							</div>
+						</div>
+						<!--   <div class="row"> 
+                                                        <div class="col-md-12"> 
+                                                            <div class="form-group"> 
+                                                                <label for="city" class="control-label">City</label> 
+                                                                <input type="text" class="form-control" id="city"  th:field="*{customer.city.name}" placeholder="Karachi"> 
+                                                            </div> 
+                                                        </div> </div>  -->
+						<div class="form-group m-b-20"
+							th:if="*{customer.customerId!=null}">
+							<label>City <span class="text-danger"></span></label> <a
+								class="btn btn-primary waves-effect waves-light R"
+								onclick="newCity();"><i class="fa fa-plus"> New</i></a> <select
+								id="cityEdit" required th:field="*{customer.city.cityId}"
+								onChange="cityCodeFunctionEdit()"
+								class="form-control select2 dropdown-toggle btn-custom2">
+								<option value="">Please Select City</option>
+								<option th:each="cityList : ${cityList}"
+									th:value="${cityList.cityId}" th:text="${cityList.name}">
+								</option>
+							</select>
+
+						</div>
+						<div class="form-group m-b-20"
+							th:if="*{customer.customerId==null}">
+							<label>City <span class="text-danger"></span></label> <a
+								class="btn btn-primary waves-effect waves-light R"
+								onclick="newCity();"><i class="fa fa-plus"> New</i></a> <select
+								id="city" required th:field="*{customer.city.cityId}"
+								onChange="cityCodeFunction()"
+								class="form-control select2 dropdown-toggle btn-custom2">
+								<option value="">Please Select City</option>
+								<option th:each="cityList : ${cityList}"
+									th:value="${cityList.cityId}" th:text="${cityList.name}">
+								</option>
+							</select>
+
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="postalcode" class="control-label">Postal
+										Code</label> <input type="text" class="form-control" id="postalcode" onkeypress="return onlyNumeric(event);" ondrop="return false;" onpaste="return false;"
+										th:field="*{customer.postalCode}" placeholder="747000"
+										required="">
+								</div>
+							</div>
+							<div class="col-md-6" th:if="*{customer.customerId==null}">
+								<div class="form-group">
+									<label for="citycode" class="control-label">City Code</label> <input
+										type="text" maxlength="6" class="form-control" id="citycode"
+										disabled placeholder="0215">
+								</div>
+							</div>
+							<div class="col-md-6" th:if="*{customer.customerId!=null}">
+								<div class="form-group">
+									<label for="citycode" class="control-label">City Code</label> <input
+										type="text" maxlength="6" class="form-control"
+										id="citycodeEdit" disabled placeholder="0215">
+								</div>
+							</div>
+
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="email" class="control-label">Email</label> <input
+										type="email" id="email" name="example-email"
+										class="form-control" th:field="*{customer.email}"
+										placeholder="doe@john.com">
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="cnic" class="control-label">CNIC</label> <input 
+										type="text" id="cnic" name="example-cnic" class="form-control"
+										th:field="*{customer.cnic}" placeholder="42106-6449522-5">
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="cdpercentage" class="control-label">Customer
+										Discount Percentage</label> <input type="text" id="cdpercentage" onkeypress="return onlyNumeric(event);" ondrop="return false;" onpaste="return false;"
+										name="example-cnic" class="form-control"
+										th:field="*{customer.discount}" placeholder="18%">
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card-box red">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="tel" class="control-label">Telephone No.</label> <input
+										type="text" maxlength="12" class="form-control"
+										th:field="*{customer.phone}"
+										onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+										id="tel" placeholder="">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="business1" class="control-label">Business 1</label>
+									<input type="text"
+										onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+										maxlength="12" class="form-control"
+										th:field="*{customer.business}" id="business1" placeholder="">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="business2" class="control-label">Business 2</label>
+									<input type="text" maxlength="12" class="form-control"
+										th:field="*{customer.business2}"
+										onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+										id="business2" placeholder="">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="mobile" class="control-label">Mobile</label> <input
+										type="text" maxlength="11" class="form-control" id="mobile"
+										th:field="*{customer.mobile}"
+										onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+										placeholder="">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="residence" class="control-label">Residence</label>
+									<input type="text" class="form-control" id="residence"
+										th:field="*{customer.residence}" maxlength="12"
+										onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+										placeholder="">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="fax" class="control-label">Fax</label> <input
+									type="text" maxlength="25" class="form-control" id="fax"
+									maxlength="12"
+									onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+									th:field="*{customer.fax}" placeholder="">
+							</div>
+						</div>
+
+					</div>
+
+
+
+					<div class="card-box purple">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="bank" class="control-label">Bank</label> <input
+										type="text" class="form-control" id="bank" disabled
+										placeholder="HBL">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="branch" class="control-label">Branch</label> <input
+										type="text" class="form-control" id="branch"
+										th:field="*{customer.branch}" placeholder="">
+								</div>
+							</div>
+
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="address" class="control-label">Address</label> <input
+										type="text" class="form-control" id="address"
+										th:field="*{customer.bankAddress}" placeholder="">
+								</div>
+							</div>
+						</div>
+
+						<div id="transportselect" class="form-group m-b-20 "
+							th:if="*{customer.customerId!=null}">
+							<label>Transport <span class="text-danger">*</span></label><a
+								onclick="newTransport();"
+								class="btn btn-primary waves-effect waves-light R"><i
+								class="fa fa-plus"> New</i></a> <select id="transportname"
+								th:field="*{customer.transport.transportId}" required="required"
+								class="form-control select2 dropdown-toggle btn-custom2">
+								<option th:each="transportList : ${transportList}"
+									th:value="${transportList.transportId}"
+									th:text="${transportList.name}"></option>
+							</select>
+						</div>
+						<div id="transportselect" class="form-group m-b-20 "
+							th:if="*{customer.customerId==null}">
+							<label>Transport <span class="text-danger">*</span></label><a
+								onclick="newTransportEdit();"
+								class="btn btn-primary waves-effect waves-light R"><i
+								class="fa fa-plus"> New</i></a> <select id="transportnameEdit"
+								th:field="*{customer.transport.transportId}" required="required"
+								class="form-control select2 dropdown-toggle btn-custom2">
+								<option th:each="transportList : ${transportList}"
+									th:value="${transportList.transportId}"
+									th:text="${transportList.name}"></option>
+							</select>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="ntn" class="control-label">N.T.N No.</label> <input onkeypress="return onlyNumeric(event);" ondrop="return false;" onpaste="return false;"
+										type="text" maxlength="10" class="form-control" id="ntn"
+										th:field="*{customer.NTN}" placeholder="">
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="gstno" class="control-label">G.S.T No</label> <input onkeypress="return onlyNumeric(event);" ondrop="return false;" onpaste="return false;"
+										type="text" maxlength="10" class="form-control" id="gstno"
+										th:field="*{customer.GSTNo}" placeholder=""> <span
+										th:if="${customerEntity.customer.customerId!=null}"> <input
+										type="hidden" id="hfPaymentMethod1" class="form-control"
+										th:field="*{customer.paymentMethod.paymentMethodId}"
+										placeholder="">
+									</span> <span th:if="${customerEntity.customer.customerId==null}">
+										<input type="hidden" id="hfPaymentMethod" class="form-control"
+										th:field="*{customer.paymentMethod.paymentMethodId}"
+										placeholder="">
+									</span>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+				<div class="col-md-12 card-box reddish">
+					<div class="form-group">
+						<label class="control-label">Terms & Conditions</label><br />
+
+						<script th:inline="javascript">
+
+					   									var paymentId= [[*{customer.paymentMethod.paymentMethodId}]];
+					   									if(paymentId!=null && paymentId==1){
+					   										$("#pmAdvance1").prop('checked', true);
+					   									}
+					   									if(paymentId!=null && paymentId==2){
+					   										$("#pmBank1").prop('checked', true);					   										
+					   									}
+					   									if(paymentId!=null && paymentId==3){
+					   										$("#pmCash1").prop('checked', true);
+					   									}
+					   									if(paymentId!=null && paymentId==4){
+					   										$("#pmCredit1").prop('checked', true);					   										
+					   									}
+					   								/* 	document.getElementsByClassName("toggle").onclick = function() {myFunction()};
+
+					   									function myFunction() {
+					   										$("#pmAdvance1").removeAttr('checked', 'checked');
+					   										$("#pmBank1").removeAttr('checked', 'checked');
+					   										$("#pmCash1").removeAttr('checked', 'checked');
+					   										$("#pmCredit1").removeAttr('checked', 'checked');
+					   									} */
+					   									</script>
+
+						<div class="col-md-12 cen fon cc-selector"
+							style="margin-bottom: -80px;"
+							th:if="*{customer.customerId==null}">
+							<div class="radio radio-info radio-inline col-sm-3"
+								style="margin-top: 5px">
+								<input type="radio" class="toggler" id="pmAdvance" value="1"
+									name="radioInline"> <label for="pmAdvance"
+									class="drinkcard-cc advance"></label>
+
+							</div>
+							<div class="radio radio-inline col-sm-3" style="margin-top: 5px">
+								<input type="radio" class="toggler" id="pmBank" value="2"
+									name="radioInline"> <label for="pmBank"
+									class="drinkcard-cc bank"></label>
+							</div>
+							<div class="radio radio-pink col-sm-3" style="margin-top: 5px">
+								<input type="radio" class="toggler" id="pmCash" value="3"
+									name="radioInline"> <label for="pmCash"
+									class="drinkcard-cc cash"></label>
+							</div>
+							<div class="radio radio-warning col-sm-2" style="margin-top: 5px">
+								<input type="radio" class="toggler" id="pmCredit" value="4"
+									name="radioInline"> <label for="pmCredit"
+									class="drinkcard-cc credit"></label>
+							</div>
+
+						</div>
+
+
+						<div class="col-md-12 cen fon cc-selector"
+							style="margin-bottom: -80px;"
+							th:if="*{customer.customerId!=null}">
+							<div class="radio radio-info radio-inline col-sm-3"
+								style="margin-top: 5px">
+								<input type="radio" class="toggle" id="pmAdvance1" required="required" value="1"
+									name="radioInline"> <label for="pmAdvance1"
+									class="drinkcard-cc advance"></label>
+
+							</div>
+							<div class="radio radio-inline col-sm-3" style="margin-top: 5px">
+								<input type="radio" class="toggle" id="pmBank1" value="2"
+									name="radioInline"> <label for="pmBank1"
+									class="drinkcard-cc bank"></label>
+							</div>
+							<div class="radio radio-pink col-sm-3" style="margin-top: 5px">
+								<input type="radio" class="toggle" id="pmCash1" value="3"
+									name="radioInline"> <label for="pmCash1"
+									class="drinkcard-cc cash"></label>
+							</div>
+							<div class="radio radio-warning col-sm-2" style="margin-top: 5px">
+								<input type="radio" class="toggle" id="pmCredit1" value="4"
+									name="radioInline"> <label for="pmCredit1"
+									class="drinkcard-cc credit"></label>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="checkbox-primary col-md-12 condition">
+						<input id="confirm" type="checkbox" required=""> <label
+							for="confirm"> All the information given above is correct
+							and verified by me personally. </label>
+					</div>
+
+
+
+
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group no-margin">
+							<label for="personalinfo" class="control-label">Personal
+								Info</label>
+							<textarea class="form-control autogrow" id="personalinfo"
+								th:field="*{customer.personalInfo}"
+								placeholder="Write something important to remember about the customer"
+								style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 60px;"></textarea>
+						</div>
+					</div>
+				</div>
+				<input type="hidden" id="customerId"
+					th:field="*{customer.customerId}" />
+
+				<div class="modal-footer cen">
+					<button type="submit" onclick="setPayMethod();setPayMethodEdit();"
+						class="btn btn-success btn-custom waves-effect waves-light">Save
+						changes</button>
+					<button type="button" onclick=" location.reload();"
+						class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</form>
+
+	</div>
+
+
+
+</body>
+
+<div th:replace="footer :: script"></div>
+<script
+	th:src="@{/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js}"></script>
+<!-- <script>
+$('.toggle').click(function() {
+$('#pmAdvance1').removeAttr('checked', 'checked'); // Unchecks it
+$('#pmCash1').removeAttr('checked', 'checked'); // Unchecks it
+$('#pmCheck1').removeAttr('checked', 'checked'); // Unchecks it
+$('#pmCredit1').removeAttr('checked', 'checked'); // Unchecks it
+});
+</script> -->
+<script>
+	function dateFunction() {
+		//alert("Date called");
+		jQuery("#myDate").datepicker({
+			autoclose : true,
+			todayHighlight : true
+		});
+
+	}
+	
+	
+	
+</script>
+
+
+
+
+</html>
+

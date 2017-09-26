@@ -1,0 +1,78 @@
+<html xmlns:th="http://www.thymeleaf.org"/>
+<html>
+	<head th:replace="header :: header">
+	</head>
+    <body class="fixed-left">
+		<!-- Begin page -->
+		<div id="wrapper">
+<div class="topbar" th:replace="header :: topbar"></div>
+				 <div class="left side-menu" th:replace="header :: navigation"></div>
+
+			<!-- ============================================================== -->
+			<!-- Start right Content here -->
+			<!-- ============================================================== -->
+			<div class="content-page">
+				<!-- Start content -->
+				<div class="content">
+						         			<div class="mdl-color--pink ml-header relative clear fadeInLeft animated" style="min-height: 195px; margin-left: -5px; margin-top: -20px;">
+    <div class="p-20">
+   
+    </div>
+  </div>
+					<div class="ml-card-holder cards-top  container" style="margin-top: -100px;">
+
+						<!-- Page-Title -->
+						<div class="row">
+							<div class="col-sm-12">
+								<h4 class="page-title">Datatable</h4>
+								<ol class="breadcrumb">
+									<li>
+										<a href="#">Ubold</a>
+									</li>
+									<li>
+										<a href="#">Tables</a>
+									</li>
+									<li class="active">
+										Datatable
+									</li>
+								</ol>
+							</div>
+						</div>
+
+
+                        <div class="row">
+                            <div class="col-sm-12 pad">
+                                <div class="card-box" style="padding: 15%;">
+								<h1 style="text-align:center;">Order Creation Failed check Order Request Quantity!</h1>
+
+										</div>
+                                </div>
+								
+								
+																 </div>		
+								 <div class="row concent">
+								<div class="col-md-4"><button class="btn btn-4 btn-4b waves-effect icon-arrow-left span3" onclick="location.href='editorderform1.html';">Back</button></div>
+								<div class="col-md-4"><button  type="reset" class="btn btn-4 btn-4a waves-effect span3" onclick="location.href='packingnote.html';" style="width: 265px;"><span>Generate Packing Note</span></button></div>
+								<div class="col-md-4"><button  type="submit" class="btn btn-4 btn-4a waves-effect icon-arrow-right span3" onclick="location.href='index.html';">Home</button></div>
+								</div>
+								 </div>
+                            </div>
+
+                        </div>
+
+							
+                    </div> <!-- container -->
+                               
+                </div> <!-- content -->
+				<div th:replace="footer :: copy"></div>
+			
+
+                 <!--   Right Sidebar -->
+            <div class="side-bar right-bar nicescroll" th:replace="footer :: rightbar"></div>
+            <!-- /Right-bar -->
+           
+        </div>
+        <!-- END wrapper -->
+<div th:replace="footer :: script"></div>
+    </body>
+</html> </html>

@@ -1,0 +1,174 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: header">
+<style>
+.checkbox label::before {
+display:none !important;
+}
+.radio label:before {
+	display: none !important;
+	content: none !important;
+}
+
+.radio label:after {
+	display: none !important;
+	content: none !important;
+}
+</style>
+
+</head>
+<body class="fixed-left">
+	<!-- Begin page -->
+
+	<div id="myDiv"></div>
+	<div id="wrapper">
+		<div class="topbar" th:replace="header :: topbar"></div>
+		<div class="left side-menu" th:replace="header :: navigation"></div>
+		<!-- ============================================================== -->
+		<!-- Start right Content here -->
+		<!-- ============================================================== -->
+		<div class="content-page">
+			<!-- Start content -->
+			<div class="content">
+				<div
+					class="mdl-color--pink ml-header relative clear fadeInLeft animated"
+					style="min-height: 195px; margin-left: -5px; margin-top: -20px;">
+					<div class="p-20"></div>
+				</div>
+				<div class="ml-card-holder cards-top container"
+					style="margin-top: -170px;">
+
+					<!-- Page-Title -->
+					<!-- <div class="row">
+						<div class="col-sm-12">
+							<h4 class="page-title">Add/ Edit Product</h4>
+
+						</div>
+					</div> -->
+
+					<div class="row">
+						<div class="col-lg-12 card-box">
+							<div class="panel panel-default panel-danger">
+								<div class="panel-heading">
+									<h3 class="panel-title">Add New Product</h3>
+								</div>
+
+
+								<!-- Notification Messages -->
+								<p th:if="${f_msg} != null">
+									<span style="color: #E81D62;" th:text="${f_msg}"></span>
+								</p>
+								<p th:if="${s_msg} != null">
+									<span style="color: #17AD46;" th:text="${s_msg}"></span>
+								</p>
+
+								<div class="panel-body">
+									<ul class="nav nav-pills m-b-30" style="padding-left: 35%;">
+										<li id="ifg"><a onclick="loadList('1')" data-toggle="tab"
+											aria-expanded="true"
+											class="btn waves-effect waves-light ifgtriwdth">SMS</a></li>
+										<li id="tri"><a onclick="loadList('2')" data-toggle="tab"
+											aria-expanded="false"
+											class="btn waves-effect waves-light ifgtriwdth">Triumph</a></li>
+									</ul>
+									<span sec:authorize="hasAnyRole('ROLE_WAREHOUSE_MANAGER','ROLE_SMS_OWNER','ROLE_SALE_MANAGER','ROLE_SALE_REP')" class="table-add label label-primary pull-right  ion-eye" style="margin-top: -40px !important;     position: static !important; ">
+						<a href="priceList" style="color:#fff !important;">View Product List</a></span>
+									<div class="tab-content br-n pn">
+
+										<!-- SMS Panel Starts Here -->
+										<div id="ifg_panel"></div>
+										<!-- ============================================================== -->
+										<!--Triumph Panel-->
+										<!-- ============================================================== -->
+										<div id="triumph_panel"></div>
+										
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+
+
+		<!--   Right Sidebar -->
+		<div class="side-bar right-bar nicescroll"
+			th:replace="footer :: rightbar"></div>
+		<!-- /Right-bar -->
+
+	</div>
+	<!-- END wrapper -->
+	<div th:replace="footer :: script"></div>
+<script th:src="@{/js/addnewpro.js}"></script>
+	<script>
+		$(document).ready(function() {
+			$('select[name=category]').change(function() {
+				if ($(this).val() == '0') {
+					$('#cupselect').show();
+				} else {
+					$('#cupselect').hide();
+				}
+			});
+		});
+		//Setting brand value
+		$("#ifgCode").val("1");
+		$("#triumphCode").val("2");
+
+		$('#clear-formTRI').on(
+				'click',
+				function() {
+					$('#formtri').find(
+							'input:text, input:password, select, textarea')
+							.val('');
+				});
+
+		$('#clear-formIFG').on(
+				'click',
+				function() {
+					$('#formifg').find(
+							'input:text, input:password, select, textarea')
+							.val('');
+				});
+		function loadList(id) {
+
+			$.ajax({
+				type : "get",
+				url : "loadlist",
+				data : "brand=" + id,
+				async : true,
+				success : function(data) {
+
+				}
+			}).done(function(data) {
+				if (id == "2") {
+					//alert(data);
+					$('#ifg_panel').empty();
+					$('#triumph_panel').empty().append(data);
+					$('#tri').addClass("active");
+					$("#ifgCode").val("1");
+					$("#triumphCode").val("2");
+				}
+				if (id == "1") {
+					//alert(data);
+					$('#triumph_panel').empty();
+					$('#ifg_panel').empty().append(data);
+					$("#ifgCode").val("1");
+					$("#triumphCode").val("2");					
+					$('#ifg').addClass("active");
+					sumabc();
+				}
+
+			}).error(function(data) {
+
+			});
+
+		};
+	</script>
+
+	<div th:replace="footer :: copy"></div>
+</body>
+</html>
