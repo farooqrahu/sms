@@ -18,7 +18,7 @@ import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 /**
- * @author Farooq, Hassan Mustafa Baig
+ * @author Farooq
  *
  */
 
