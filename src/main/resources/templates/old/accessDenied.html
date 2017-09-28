@@ -1,0 +1,64 @@
+<html xmlns:th="http://www.thymeleaf.org">
+</head>
+<body class="fixed-left">
+	<!-- Begin page -->
+	<div id="wrapper">
+
+		<!-- ============================================================== -->
+		<!-- Start right Content here -->
+		<!-- ============================================================== -->
+		<div class="content-page">
+			<!-- Start content -->
+			<div class="content">
+				<div
+					class="mdl-color--pink ml-header relative clear fadeInLeft animated"
+					style="min-height: 195px; margin-left: -5px; margin-top: -20px;">
+					<div class="p-20"></div>
+				</div>
+				<div class="ml-card-holder cards-top  container"
+					style="margin-top: -100px;">
+					<div class="row">
+						<div class="col-sm-12 pad">
+							<div class="card-box" style="padding: 15%;">
+								<!-- <h1 style="text-align:center;">Order Form Successfully forwarded to Warehouse!</h1> -->
+								<!-- Put your Text here-->
+								<div th:include="header :: header"></div>
+								<div class="container">
+									<h1 th:inline="text">Access denied</h1>
+									<h3 th:inline="text">You do not have
+										permission for that resource.</h3>
+									<a th:href="@{/logout}" href="logout"> Logout </a><br /> <a
+										th:href="@{/index}" href="home.html"> Home </a>
+
+									<h4 th:inline="text">Please contact the operator with the
+										above information.</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+
+	</div>
+	<!-- container -->
+
+	</div>
+	<!-- content -->
+
+
+
+	<!--   Right Sidebar -->
+	<div class="side-bar right-bar nicescroll"
+		th:replace="footer :: rightbar"></div>
+	<!-- /Right-bar -->
+
+	</div>
+	<!-- END wrapper -->
+	<div th:replace="footer :: script"></div>
+	<div th:replace="footer :: copy"></div>
+</body>
+</html>

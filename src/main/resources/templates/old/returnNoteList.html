@@ -1,0 +1,172 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: header"></head>
+<body class="fixed-left">
+	<div id="wrapper">
+		<div class="topbar" th:replace="header :: topbar"></div>
+		<div class="left side-menu" th:replace="header :: navigation"></div>
+
+
+		<!-- ============================================================== -->
+		<!-- Start right Content here -->
+		<!-- ============================================================== -->
+		<div class="content-page">
+			<!-- Start content -->
+			<div class="content">
+				<div
+					class="mdl-color--pink ml-header relative clear fadeInLeft animated"
+					style="min-height: 195px; margin-left: -5px; margin-top: -20px;">
+					<div class="p-20">
+						<h1 class="cen white">Return Note List</h1>
+					</div>
+				</div>
+				<div class="ml-card-holder cards-top  container"
+					style="margin-top: -100px;">
+
+					<!-- Page-Title -->
+					<div class="row">
+						<div class="col-sm-12">
+							<h4 class="page-title">Return Note List</h4>
+							<ol class="breadcrumb">
+
+							</ol>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="card-box fadeInUp animated">
+								<div class="panel">
+									<p th:if="${f_msg} != null">
+										<span style="color: #E81D62;" ></span><script th:inline="javascript">
+										 										 
+										  $( document ).ready(function() {
+											  var fMsg= [[${f_msg}]];	
+											  swal(fMsg);
+											});
+										 
+										</script>
+									</p>
+									<p th:if="${s_msg} != null">
+										<span style="color: #17AD46;">
+										<script th:inline="javascript">
+										 										 
+										  $( document ).ready(function() {
+											  var sMsg= [[${s_msg}]];	
+											  swal(sMsg);
+											});
+										 
+										</script>
+										</span>
+									</p>
+									<div class="panel-body">
+
+										<div class="">
+											<table
+												class="table table-striped table-hover footable-loaded footable"
+												id="orderlist">
+												<thead>
+													<tr>
+														<th>Sales Rep</th>
+														<th>Customer</th>
+														<th>Brand</th>
+														<th>Person Contacted</th>
+														<th>Visit Time</th>
+														<th>Total Quantity</th>
+														<th>Total Amount</th>
+														<th>Status</th>
+														<th>View</th>
+													</tr>
+												</thead>
+												<tbody th:if="${returnNoteList!=null}">
+													<tr class="gradeA"
+														th:each="orderlist: ${returnNoteList.orderList}">
+														<td
+															th:text="${orderlist.customer.user.name}">id</td>
+														<td th:text="${orderlist.customer.name}">name</td>
+														<td th:text="${orderlist.brand.name}">brand</td>
+														<td th:text="${orderlist.personContact}">personContact</td>
+														<td th:text="${orderlist.visitTime}">visitTime</td>
+														<td th:text="${orderlist.totalPieces}">totalPieces</td>
+														<td th:text="${orderlist.totalAmount}">totalAmount</td>
+														<td th:text="${orderlist.status.title}">status</td>
+
+														<td><a style="cursor: pointer;"
+															th:onclick="'javascript:setObject(\'' + ${orderlist.customer.customerId} +'\',\''+ ${orderlist.orderId} + '\');'">
+																<i class="fa fa-eye view"></i>
+														</a></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<!-- end: page -->
+
+								</div>
+								<!-- end Panel -->
+								<!-- <div class="panel-body">
+
+
+								
+								<!-- end: page -->
+
+							</div>
+							<!-- end Panel -->
+
+						</div>
+
+					</div>
+					<!-- end col -->
+
+
+				</div>
+
+
+
+
+
+			</div>
+			<!-- container -->
+
+		</div>
+		<!-- content -->
+
+
+	</div>
+
+
+	<!-- ============================================================== -->
+	<!-- End Right content here -->
+	<!-- ============================================================== -->
+
+
+
+	<!--   Right Sidebar -->
+	<div class="side-bar right-bar nicescroll"
+		th:replace="footer :: rightbar"></div>
+	<!-- /Right-bar -->
+
+	</div>
+	<!-- END wrapper -->
+
+
+	<div th:replace="footer :: script"></div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#orderlist').dataTable();
+
+		});
+	</script>
+	<script type="text/javascript">
+		function setObject(id, OrderId) {
+			$(location).attr(
+					'href',
+					'loadCustomerReturnNote?customerId=' + id + "&OrderId="
+							+ OrderId);
+		}
+	</script>
+
+</body>
+
+
+</html>

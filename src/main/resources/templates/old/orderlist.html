@@ -1,0 +1,320 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: header"></head>
+<body class="fixed-left">
+	<div id="wrapper">
+		<div class="topbar" th:replace="header :: topbar"></div>
+		<div class="left side-menu" th:replace="header :: navigation"></div>
+
+
+		<!-- ============================================================== -->
+		<!-- Start right Content here -->
+		<!-- ============================================================== -->
+		<div class="content-page">
+			<!-- Start content -->
+			<div class="content">
+				<div
+					class="mdl-color--pink ml-header relative clear fadeInLeft animated"
+					style="min-height: 195px; margin-left: -5px; margin-top: -20px;">
+					<div class="p-20">
+						<h1 class="cen white">Order List</h1>
+					</div>
+
+				</div>
+				<div class="ml-card-holder cards-top  container"
+					style="margin-top: -100px;">
+
+					<!-- Page-Title -->
+					<div class="row">
+						<div class="col-lg-12 card-box">
+							<div class="panel panel-default panel-danger">
+								<span style="color: green;" th:text="${responseMessage}"></span>
+								<div class="panel-heading" style="display: none"></div>
+
+
+								<!-- Notification Messages -->
+
+
+
+								<div class="panel-body">
+									<ul class="nav nav-pills m-b-30" style="padding-left: 35%;">
+										<li id="ifg" class="active"><a aria-expanded="true"
+											class="btn waves-effect waves-light ifgtriwdth"
+											data-toggle="tab" onclick="showTable('1')">SMS</a></li>
+										<li id="tri"><a aria-expanded="false"
+											class="btn waves-effect waves-light ifgtriwdth"
+											data-toggle="tab" onclick="showTable('2')">Triumph</a></li>
+									</ul>
+									<div class="tab-content br-n pn">
+
+										<!-- SMS Panel Starts Here -->
+										<div id="ifg_panel">
+											<!--SMS Starts-->
+											<div class="tab-pane active" id="navpills-11"
+												style="display: none">
+												<div class="row">
+													<div class="col-md-12">
+
+
+
+														<div class="row">
+															<div class="col-md-12">
+																<div class="card-box">
+																	<div>
+																		<h1 class="text-muted m-t-0 m-b-20"
+																			style="color: #EB088D">
+																			<b>SMS Orders</b>
+
+																		</h1>
+																	</div>
+
+																	<table
+																		class="table table-striped table-hover footable-loaded footable"
+																		id="orderlistIFG">
+																		<thead>
+																			<tr>
+																				<th>Sales Rep</th>
+																				<th>Customer Name</th>
+																				<th>Person Contacted</th>
+																				<th>Visit Time</th>
+																				<th>Total Quantity</th>
+																				<th>Total Amount</th>
+																				<th>Status</th>
+																				<th>View</th>
+																			</tr>
+																		</thead>
+																		<tbody>
+																			<tr
+																				th:if="${orderlist.status.title}!='Delivered' and ${orderlist.userRole != 'ROLE_SMS_OWNER'}"
+																				class="gradeA" th:each="orderlist: ${orderReqlist}">
+																				<td th:text="${orderlist.customer.user.name}">id</td>
+																				<td th:text="${orderlist.customer.name}">name</td>
+
+																				<td th:text="${orderlist.personContact}">personContact</td>
+																				<td th:text="${orderlist.visitTime}">visitTime</td>
+																				<td th:text="${orderlist.totalPieces}">totalPieces</td>
+																				<td th:text="${orderlist.totalAmount}">totalAmount</td>
+																				<td th:text="${orderlist.status.title}">status</td>
+
+																				<!--  <td><a href="viewOrder?orderId=\''+ ${orderlist.orderId} +'\'" class="view"><i
+															class="fa fa-eye view"></i></a></td>   -->
+
+																				<td class="actions"><a href="#"
+																					th:if="${orderlist.userRole == 'ROLE_WAREHOUSE_MANAGER'}"
+																					th:onclick="'javascript:setObject(\''+ ${orderlist.orderId} +'\');'"
+																					id="viewExistingOrder"><i
+																						class="fa fa-eye view"></i></a> <a
+																					th:if="${orderlist.status.title == 'Packing Note Generated'}"
+																					href="#"
+																					sec:authorize="hasAnyRole('ROLE_WAREHOUSE_MANAGER')"
+																					id="viewExistingRequest"
+																					th:onclick="'javascript:setOrderStatus(\''+ ${orderlist.orderId} +'\');'"><i
+																						class="fa fa-truck view"></i></a></td>
+																				<td class="actions"><a href="#"
+																					th:if="${orderlist.userRole == 'ROLE_SALE_MANAGER'}"
+																					th:onclick="'javascript:setOrderRequest(\''+ ${orderlist.orderRequestId} +'\');'"
+																					id="viewExistingRequest"><i
+																						class="fa fa-eye view"></i></a></td>
+																				<td class="actions"><a href="#"
+																					th:if="${orderlist.userRole == 'ROLE_SMS_OWNER'}"
+																					th:onclick="'javascript:setOrderRequest(\''+ ${orderlist.orderRequestId} +'\');'"
+																					id="viewExistingRequest"><i
+																						class="fa fa-eye view"></i></a></td>
+
+																			</tr>
+
+
+
+
+
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+
+
+
+														</div>
+
+
+													</div>
+												</div>
+
+											</div>
+
+											<!--SMS Ends-->
+										</div>
+										<!-- ============================================================== -->
+										<!--Triumph Panel-->
+										<!-- ============================================================== -->
+										<div class="tab-pane active" id="navpills-12"
+											style="display: none">
+											<div class="row">
+												<div class="col-md-12">
+
+
+
+													<div class="row">
+														<div class="col-md-12">
+															<div class="card-box">
+																<div>
+																	<h1 class="text-muted m-t-0 m-b-20"
+																		style="color: #EB088D">
+																		<b>Triumph Orders</b>
+																	</h1>
+																</div>
+
+																<table
+																	class="table table-striped table-hover footable-loaded footable"
+																	id="orderlistTRI">
+																	<thead>
+																		<tr>
+																			<th>Sales Rep</th>
+																			<th>Customer Name</th>
+																			<th>Person Contacted</th>
+																			<th>Visit Time</th>
+																			<th>Total Quantity</th>
+																			<th>Total Amount</th>
+																			<th>Status</th>
+																			<th>View</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr
+																			th:if="${orderlist.status.title}!='Delivered' and ${orderlist.userRole != 'ROLE_SMS_OWNER'}"
+																			class="gradeA" th:each="orderlist: ${orderReqTri}">
+																			<td th:text="${orderlist.customer.user.name}">id</td>
+																			<td th:text="${orderlist.customer.name}">name</td>
+
+																			<td th:text="${orderlist.personContact}">personContact</td>
+																			<td th:text="${orderlist.visitTime}">visitTime</td>
+																			<td th:text="${orderlist.totalPieces}">totalPieces</td>
+																			<td th:text="${orderlist.totalAmount}">totalAmount</td>
+																			<td th:text="${orderlist.status.title}">status</td>
+
+																			<!--  <td><a href="viewOrder?orderId=\''+ ${orderlist.orderId} +'\'" class="view"><i
+															class="fa fa-eye view"></i></a></td>   -->
+
+																			<td class="actions"><a href="#"
+																				th:if="${orderlist.userRole == 'ROLE_WAREHOUSE_MANAGER'}"
+																				th:onclick="'javascript:setObject(\''+ ${orderlist.orderId} +'\');'"
+																				id="viewExistingOrder"><i class="fa fa-eye view"></i></a>
+																				<a
+																				th:if="${orderlist.status.title == 'Packing Note Generated'}"
+																				href="#"
+																				sec:authorize="hasAnyRole('ROLE_WAREHOUSE_MANAGER')"
+																				th:onclick="'javascript:setOrderStatus(\''+ ${orderlist.orderId} +'\');'"
+																				id="viewExistingRequest"><i
+																					class="fa fa-truck view"></i></a></td>
+																			<td class="actions"><a href="#"
+																				th:if="${orderlist.userRole == 'ROLE_SALE_MANAGER'}"
+																				th:onclick="'javascript:setOrderRequest(\''+ ${orderlist.orderRequestId} +'\');'"
+																				id="viewExistingRequest"><i
+																					class="fa fa-eye view"></i></a></td>
+																			<td class="actions"><a href="#"
+																				th:if="${orderlist.userRole == 'ROLE_SMS_OWNER'}"
+																				th:onclick="'javascript:setOrderRequest(\''+ ${orderlist.orderRequestId} +'\');'"
+																				id="viewExistingRequest"><i
+																					class="fa fa-eye view"></i></a></td>
+
+																		</tr>
+
+
+
+
+
+																	</tbody>
+																</table>
+															</div>
+														</div>
+
+
+
+													</div>
+
+
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+					<!-- end col -->
+
+
+				</div>
+
+
+
+
+
+			</div>
+			<!-- container -->
+
+		</div>
+		<!-- content -->
+
+
+	</div>
+
+
+
+	<!-- ============================================================== -->
+	<!-- End Right content here -->
+	<!-- ============================================================== -->
+
+
+
+	<!--   Right Sidebar -->
+	<div class="side-bar right-bar nicescroll"
+		th:replace="footer :: rightbar"></div>
+	<!-- /Right-bar -->
+
+	</div>
+	<!-- END wrapper -->
+	<div th:replace="footer :: script"></div>
+
+	<script>
+		function showTable(id) {
+			if (id == '1') {
+				document.getElementById("navpills-11").style.display = "block";
+				document.getElementById("navpills-12").style.display = "none";
+			} else {
+				document.getElementById("navpills-12").style.display = "block";
+				document.getElementById("navpills-11").style.display = "none";
+
+			}
+		}
+		function setObject(id) {
+
+			window.location.href = 'viewOrder?orderId=' + id;
+
+		}
+		function setOrderRequest(id) {
+
+			window.location.href = 'viewOrderRequest?orderRequestId=' + id;
+		}
+		function setOrderStatus(id) {
+			window.location.href = 'setOrderstatus?orderId=' + id;
+		}
+	</script>
+	<script>
+		$(document).ready(function() {
+			$('#orderlistIFG').dataTable();
+			$('#orderlistTRI').dataTable();
+
+		});
+	</script>
+
+	<script th:src="@{/plugins/parsleyjs/dist/parsley.min.js}"></script>
+	<script
+		th:src="@{/plugins/bootstrap-inputmask/bootstrap-inputmask.min.js}"></script>
+	<script th:src="@{/plugins/autoNumeric/autoNumeric.js}"></script>
+
+</body>
+</html>

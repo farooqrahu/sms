@@ -1,0 +1,172 @@
+
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: header">
+<!-- Plugin Css-->
+<link rel="stylesheet"
+	href="assets/plugins/magnific-popup/dist/magnific-popup.css" />
+<link rel="stylesheet"
+	href="assets/plugins/jquery-datatables-editable/datatables.css" />
+</head>
+<body class="fixed-left">
+	<!-- Begin page -->
+	<div id="wrapper">
+		<div class="topbar" th:replace="header :: topbar"></div>
+		<div class="left side-menu" th:replace="header :: navigation"></div>
+		<!-- ============================================================== -->
+		<!-- Start right Content here -->
+		<!-- ============================================================== -->
+		<div class="content-page">
+			<!-- Start content -->
+			<div class="content">
+				<div
+					class="mdl-color--pink ml-header relative clear fadeInLeft animated"
+					style="min-height: 195px; margin-left: -5px; margin-top: -20px;">
+					<div class="p-20">
+						<h1 class="mdl-color-text--white m-t-20 m-b-5 cen">Settings Panel</h1>
+					</div>
+				</div>
+				<div class="ml-card-holder cards-top container"
+					style="margin-top: -100px;">
+
+
+
+					<div class="panel">
+
+						<div class="panel-body">
+							<p th:if="${f_msg} != null">
+								<span style="color: #E81D62;" th:text="${f_msg}"></span>
+							</p>
+							<p th:if="${s_msg} != null">
+								<span style="color: #17AD46;" th:text="${s_msg}"></span>
+							</p>
+							<div class="row">
+							
+								<div class="col-sm-6">
+									<div class="h5 m-0 cc-selector"
+										style="color: #7A7979; float: right;">									
+										<div class="btn-group vertical-middle" data-toggle="buttons">
+											<label class="waves-effect waves-light drinkcard-uc password"
+												onclick="loadModal()"> <input
+												type="radio" autocomplete="off" id="salesr"
+												checked="checked"> Change Password
+											</label> <label
+												class="waves-effect waves-light drinkcard-uc dataentry"
+												onclick="#"> <input
+												type="radio" autocomplete="off" id="dataent"
+												checked="checked">Abc
+											</label> <label class="waves-effect waves-light drinkcard-uc manager"
+												onclick="#">
+												<input type="radio" autocomplete="off" id="salesr"
+												checked="checked">  Xyz
+											</label>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+
+						
+						</div>
+						<!-- end: page -->
+
+					</div>
+					<!-- end Panel -->
+
+					<div id="tabs-modal" class="modal fade in col-sm-12" tabindex="-1"
+						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+						style="display: none; padding-right: 17px;">
+						<div class="modal-dialog card-box" style="width: 75%;">
+							<div class="panel panel-default panel-danger">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true"
+									style="width: 40px; margin-top: -5px; margin-bottom: 0px;">
+									<span>&times;</span><span class="sr-only">Close</span>
+								</button>
+								<div class="panel-heading">
+									<h3 class="panel-title">Change Password</h3>
+								</div>
+
+
+								<div class="panel-body">
+									<div class="tab-content br-n pn">
+
+										<!-- ============================================================== -->
+										<!--SalesRep Panel-->
+										<!-- ============================================================== -->
+										<div class="tab-pane active" id="navpills-1">
+											<div class="row">
+												<div class="col-sm-12 card-box">
+													<div class="custom-modal-text text-left"
+														th:replace="changepasswordmodals :: changePassword"></div>
+												</div>
+											</div>
+										</div>
+								<!-- Panels Ends -->
+
+
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+				
+					<!-- ============================================================== -->
+					<!-- End Right content here -->
+					<!-- ============================================================== -->
+					<div class="side-bar right-bar nicescroll"
+						th:replace="footer :: rightbar"></div>
+					<!-- /Right-bar -->
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END wrapper -->
+
+	<div th:replace="footer :: script"></div>
+
+	<div th:replace="footer :: copy"></div>
+<!-- 	<script>
+		$('#mainTable').editableTableWidget().numericInputExample().find(
+				'td:first').focus();
+	</script>
+ -->	<script type="text/javascript">
+		$(document).ready(function() {
+
+			$('form').parsley();
+			$('#userlist').dataTable();
+
+		});
+	</script>
+	<script type="text/javascript">
+		
+		/* function setObject(id) {
+			$.ajax({
+				type : "get",
+				url : "editUser",
+				data : "userId=" + id,
+				success : function(data) {
+					$('#modelshow').html(data);
+					$('#modaledit').modal('show');
+				}
+			}).done(function(data) {
+				if (data != 0) {
+
+				} else {
+				}
+			}).error(function(data) {
+			});
+
+		} */
+		function loadModal() {
+
+			changePass();
+
+		}
+	</script>
+</body>
+</html>
+

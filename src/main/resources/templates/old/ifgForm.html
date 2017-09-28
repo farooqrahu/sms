@@ -1,0 +1,601 @@
+<!--SMS Starts-->
+<div id="navpills-11" class="tab-pane active" th:fragment="ifg">
+	<div class="row">
+		<div class="col-md-12">
+
+			<form role="form" id="formifg" th:action="@{/saveProduct}"
+				th:object="${entity}" method="POST">
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="card-box">
+							<div th:replace="text :: ifgadd"></div>
+
+							<input type="hidden" th:field="*{product.productId}" id="pIdifg" />
+							<input type="hidden" id="ifgCode"
+								th:field="*{product.brand.brandId}">
+
+							<div class="form-group m-b-20">
+								<label>Product Category<span class="text-danger">*</span></label>
+								<a id="ifgprocat" onclick="addIfgPro();"
+									class="btn btn-primary waves-effect waves-light R"><i
+									class="fa fa-plus"> New</i></a> <select id="ifgproductcat"
+									th:field="*{product.productCategory.productCategoryId}"
+									name="category" required="required"
+									class="form-control select2 dropdown-toggle btn-custom2">
+									<option value="" selected="selected">Please Select</option>
+									<option th:each="pCatList : ${productCategoryList}"
+										th:value="${pCatList.productCategoryId}"
+										th:text="${pCatList.name}"></option>
+								</select>
+							</div>
+
+							<div class="form-group m-b-20">
+								<label>Product Name<span class="text-danger">*</span></label> <a
+									onclick="ifgProName()" id="ifgproname"
+									class="btn btn-primary waves-effect waves-light R"><i
+									class="fa fa-plus"> New</i></a> <select id="ifgproductname"
+									th:field="*{product.productName.productNameId}"
+									required="required"
+									class="form-control select2 dropdown-toggle btn-custom2">
+									<option value="" selected="selected">Please Select</option>
+									<option th:each="productNameList : ${productNameList}"
+										th:value="${productNameList.productNameId}"
+										th:text="${productNameList.name}"></option>
+								</select>
+							</div>
+
+							<div class="form-group m-b-20">
+								<label>Color <span class="text-danger">*</span></label> <a
+									onclick="ifgProColor()" id="ifgprocolor"
+									class="btn btn-primary waves-effect waves-light R"><i
+									class="fa fa-plus"> New</i></a> <select id="ifgproductcolor"
+									th:field="*{product.color.colorId}" required="required"
+									class="form-control select2 dropdown-toggle btn-custom2">
+									<option value="" selected="selected">Please Select</option>
+
+									<option th:each="colorList : ${colorList}"
+										th:value="${colorList.colorId}" th:text="${colorList.name}"></option>
+								</select>
+
+							</div>
+
+							<div class="form-group m-b-20">
+
+								<label>Material<span class="text-danger">*</span></label> <a
+									onclick="ifgProMat()" id="ifgpromat"
+									class="btn btn-primary waves-effect waves-light R"><i
+									class="fa fa-plus"> New</i></a> <select id="ifgproductmat"
+									th:field="*{product.material.materialId}" required="required"
+									class="form-control select2 dropdown-toggle  btn-custom2">
+									<option value="" selected="selected">Please Select</option>
+
+									<option th:each="materialList : ${materialList}"
+										th:value="${materialList.materialId}"
+										th:text="${materialList.name}"></option>
+								</select>
+							</div>
+							<div class="form-group m-b-20">
+								<label>Material's Composition<span class="text-danger">*</span></label>
+								<a id="ifgprocomp" onclick="ifgProMatCom()"
+									class="btn btn-primary waves-effect waves-light R"><i
+									class="fa fa-plus"> New</i></a> <select id="ifgproductcomp"
+									th:field="*{product.materialComposition.materialCompositionId}"
+									required="required"
+									class="form-control select2 dropdown-toggle btn-custom2">
+									<option value="" selected="selected">Please Select</option>
+
+									<option
+										th:each="materialCompositionList : ${materialCompositionList}"
+										th:value="${materialCompositionList.materialCompositionId}"
+										th:text="${materialCompositionList.name}"></option>
+								</select>
+							</div>
+
+							<div id="cupselect" class="form-group m-b-20 ">
+								<label>Cup<span class="text-danger">*</span></label> <a
+									onclick="ifgProCup()" id="ifgprocup"
+									class="btn btn-primary waves-effect waves-light R"><i
+									class="fa fa-plus"> New</i></a> <select id="ifgproductcup"
+									th:field="*{product.cup.cupId}" required="required"
+									class="form-control select2 dropdown-toggle btn-custom2">
+									<option value="" selected="selected">Please Select</option>
+
+									<option th:each="cupList: ${cupList}"
+										th:value="${cupList.cupId}" th:text="${cupList.name}"></option>
+								</select>
+							</div>
+							<div id="size" class="form-group m-b-20">
+								<label>Size</label>
+								<!--  <a id="ifgprosize" onclick="ifgProSize()"
+									class="btn btn-primary waves-effect waves-light R"><i
+									class="fa fa-plus"> New</i></a> -->
+								<select id="ifgproductsize" th:field="*{product.size.sizeId}"
+									required="required"
+									class="form-control select2 dropdown-toggle btn-custom2">
+									<option value="" selected="selected">Please Select</option>
+
+									<option th:each="sizeList: ${sizeList}"
+										th:value="${sizeList.sizeId}"
+										th:text="${sizeList.productSize}"></option>
+								</select>
+							</div>
+
+							<div id="Quantity" class="form-group m-b-20">
+								<label>Quantity</label> <input id="ifgquantity"
+									th:field="*{product.quantity}" required="required"
+									class="form-control select2 dropdown-toggle btn-custom2 quan"></input>
+							</div>
+
+							<div class="form-group m-b-20">
+								<label>Enable Total Quantity Display</label>
+							</div>
+							<input type="checkbox" style="display:none" th:field="*{product.isActive}" checked="">
+
+
+
+							<!-- 	<div class="col-md-12" style="text-align: center;">
+								<div class="checkbox checkbox-slider--a checkbox-slider-lg">
+									<label> <input type="checkbox" name="isQuantityExposable" id="isQuantityExposable" th:field="*{product.isQuantityExposable}" checked=""><span></span>
+									</label>
+								</div>
+							</div>
+ -->
+							<input type="checkbox" name="isQuantityExposable"
+								id="isQuantityExposable"
+								th:field="*{product.isQuantityExposable}" checked="">
+						</div>
+					</div>
+
+					<div class="col-md-6 card-box">
+
+						<h1 class="text-muted m-t-0 m-b-20" style="color: #EB088D">
+							<b>Unit Pricing</b>
+						</h1>
+
+
+						<div id="price12" class="form-group m-b-20 btn prcbtn">
+							<label>Ex-Factory Price <span class="text-danger">*</span></label>
+							<input id="ifgnum1" th:field="*{product.exFactory}" type="text"
+								required="required" class="form-control btn-custom2"
+								placeholder="e.g. 562.56">
+						</div>
+						<div id="price22" class="form-group m-b-20 btn prcbtn">
+
+							<label><span th:text="${tax.ifgGstTax}"></span>% GST <span
+								class="text-danger">*</span></label> <input th:readonly="true" id="ifggst"
+								th:field="*{product.gstRate}" type="text" required="required"
+								class="form-control btn-custom2">
+						</div>
+						<div id="price32" class="form-group m-b-20 btn  prcbtn">
+							<label>Total Price <span class="text-danger">*</span></label> <input th:readonly="true"
+								id="ifgsum" th:field="*{product.totalPrice}" type="text"
+								required="required" class="form-control btn-custom2" value="">
+						</div>
+						<div id="price42" class="form-group m-b-20 btn prcbtn">
+							<label>Market Retail Price <span class="text-danger">*</span></label>
+							<input id="ifgmarketretail" onchange="checkMarketPric()"
+								 th:field="*{product.marketRetailPrice}" type="text"
+								required="required" class="form-control btn-custom2"
+								placeholder="e.g. 562.56">
+						</div>
+
+						<div class="col-md-12 cen fon cc-selector">
+							<h1 class="text-muted m-t-0 m-b-20" style="color: #EB088D">
+								<b>Add Product To:</b>
+							</h1>
+							<div class="radio radio-info radio-inline">
+								<input type="radio" id="ifgwarehouse1"
+									th:field="*{product.warehouse.warehouseId}" value="1"
+									name="radioInline" required> <label for="ifgwarehouse1"
+									class="drinkcard-cc visa"><p>SMS Warehouse</p></label>
+							</div>
+							<div class="radio radio-success radio-inline">
+								<input type="radio" id="ifgwarehouse2"
+									th:field="*{product.warehouse.warehouseId}" value="2"
+									name="radioInline"> <label for="ifgwarehouse2"
+									class="drinkcard-cc mastercard"><p>Triumph
+										Warehouse</p></label>
+							</div>
+
+							<div class="radio radio-pink radio-inline">
+								<input type="radio" id="ifgwarehouse3"
+									th:field="*{product.warehouse.warehouseId}" value="3"
+									name="radioInline"> <label for="ifgwarehouse3"
+									class="drinkcard-cc debitcard"><p>Central Warehouse</p></label>
+							</div>
+						</div>
+
+					</div>
+
+
+				</div>
+				<div id="savecancel" class="row">
+					<div class="col-sm-12">
+						<hr />
+						<div class="text-center p-20">
+							<button id="saveifg" type="submit" onclick="loadDoc();"
+								class="btn btn-success btn-custom waves-effect waves-light wdth">Save</button>
+							<span th:if="*{product.productId}==null">
+
+								<button type="button" onClick="this.form.reset()"
+									class="btn btn-inverse btn-custom waves-effect waves-light wdth">Reset</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</div>
+<script type="text/javascript">
+	var productCategoryExist = false;
+	function addIfgPro() {
+		$('#ifg-modal').modal('hide');
+		swal({
+			title : "Add Product Category!",
+			text : 'Type Product Category Name:',
+			type : 'input',
+			showCancelButton : true,
+			closeOnConfirm : false,
+			animation : "slide-from-top",
+			inputPlaceholder : "Category Name",
+		}, function(inputValue) {
+
+			$('#ifgproductcat option').each(function(e) {
+				if (this.text == inputValue) {
+					swal.showInputError("Already Exists in the List!");
+					inputValue = false;
+					return inputValue = false;
+					return false;
+					return;
+				} else {
+					productCategoryExist = false;
+				}
+			});
+
+			if (inputValue === false) {
+				$('#ifg-modal').modal('show');
+				return false;
+			}
+
+			if (inputValue === "") {
+				swal.showInputError("You need to write something!");
+
+			} else {
+				var url = "/saveProductCategory";
+				var msg = "Product Category";
+				var id = "#ifgproductcat";
+				test(inputValue, url, msg, id, '1');
+				/* swal("Added!", "Category Name Added!", "success"); */
+			}
+			$('#ifg-modal').modal('show');
+		});
+	}
+	function ifgProName() {
+		$('#ifg-modal').modal('hide');
+		swal({
+			title : "Add Product Name!",
+			text : 'Type Product Name:',
+			type : 'input',
+			showCancelButton : true,
+			closeOnConfirm : false,
+			animation : "slide-from-top",
+			inputPlaceholder : "Product Name",
+		}, function(inputValue) {
+
+			$('#ifgproductname option').each(function(e) {
+				if (this.text == inputValue) {
+					swal.showInputError("Already Exists in the List!");
+					inputValue = false;
+					return inputValue = false;
+					return false;
+					return;
+				} else {
+					productCategoryExist = false;
+				}
+			});
+
+			if (inputValue === false) {
+				$('#ifg-modal').modal('show');
+				return false;
+			}
+
+			if (inputValue === "") {
+				swal.showInputError("You need to write something!");
+				return false;
+			} else {
+				var url = "/saveProductName";
+				var msg = "Product Name";
+				var id = "#ifgproductname";
+
+				test(inputValue, url, msg, id, '1');
+			}
+			$('#ifg-modal').modal('show');
+		});
+	}
+	///
+	function ifgProColor() {
+		$('#ifg-modal').modal('hide');
+		swal({
+			title : "Add New Color!",
+			text : 'Type Color Name:',
+			type : 'input',
+			showCancelButton : true,
+			closeOnConfirm : false,
+			animation : "slide-from-top",
+			inputPlaceholder : "Type Color Name",
+		}, function(inputValue) {
+
+			$('#ifgproductcolor option').each(function(e) {
+				if (this.text == inputValue) {
+					swal.showInputError("Already Exists in the List!");
+					inputValue = false;
+					return inputValue = false;
+					return false;
+					return;
+				} else {
+					productCategoryExist = false;
+				}
+			});
+			if (inputValue === false) {
+				$('#ifg-modal').modal('show');
+				return false;
+			}
+
+			if (inputValue === "") {
+				swal.showInputError("You need to write something!");
+				return false;
+			} else {
+				var url = "/saveColor";
+				var msg = "Color";
+				var id = "#ifgproductcolor";
+				test(inputValue, url, msg, id, '1');
+			}
+			$('#ifg-modal').modal('show');
+		});
+	}
+
+	///
+	function ifgProMat() {
+		$('#ifg-modal').modal('hide');
+		swal({
+			title : "Add New Material!",
+			text : 'Type Material Name:',
+			type : 'input',
+			showCancelButton : true,
+			closeOnConfirm : false,
+			animation : "slide-from-top",
+			inputPlaceholder : "Material Name",
+		}, function(inputValue) {
+			$('#ifgproductmat option').each(function(e) {
+				if (this.text == inputValue) {
+					swal.showInputError("Already Exists in the List!");
+					inputValue = false;
+					return inputValue = false;
+					return false;
+					return;
+				} else {
+					productCategoryExist = false;
+				}
+			});
+
+			if (inputValue === false) {
+				$('#ifg-modal').modal('show');
+				return false;
+			}
+
+			if (inputValue === "") {
+				swal.showInputError("You need to write something!");
+				return false;
+			} else {
+				var url = "/saveMaterial";
+				var msg = "Material";
+				var id = "#ifgproductmat";
+				test(inputValue, url, msg, id, '1');
+			}
+			$('#ifg-modal').modal('show');
+		});
+
+	}
+
+	//
+	function ifgProMatCom() {
+		$('#ifg-modal').modal('hide');
+		swal({
+			title : "Add Material Composition!",
+			text : 'Type Material Composition Name:',
+			type : 'input',
+			showCancelButton : true,
+			closeOnConfirm : false,
+			animation : "slide-from-top",
+			inputPlaceholder : "Material Composition Name",
+		}, function(inputValue) {
+			$('#ifgproductcomp option').each(function(e) {
+				if (this.text == inputValue) {
+					swal.showInputError("Already Exists in the List!");
+					inputValue = false;
+					return inputValue = false;
+					return false;
+					return;
+				} else {
+					productCategoryExist = false;
+				}
+			});
+			if (inputValue === false) {
+				$('#ifg-modal').modal('show');
+				return false;
+			}
+
+			if (inputValue === "") {
+				swal.showInputError("You need to write something!");
+				return false;
+			} else {
+				var url = "/saveMaterialComposition";
+				var msg = "Material Composition";
+				var id = "#ifgproductcomp";
+				test(inputValue, url, msg, id, '1');
+			}
+			$('#ifg-modal').modal('show');
+		});
+
+	}
+
+	//
+
+	function ifgProCup() {
+		$('#ifg-modal').modal('hide');
+		swal({
+			title : "Add New Cup!",
+			text : 'Type Cup Alphabet:',
+			type : 'input',
+			showCancelButton : true,
+			closeOnConfirm : false,
+			animation : "slide-from-top",
+			inputPlaceholder : "Cup",
+		}, function(inputValue) {
+			$('#ifgproductcup option').each(function(e) {
+				if (this.text == inputValue) {
+					swal.showInputError("Already Exists in the List!");
+					inputValue = false;
+					return inputValue = false;
+					return false;
+					return;
+				} else {
+					productCategoryExist = false;
+				}
+			});
+			if (inputValue === false) {
+				$('#ifg-modal').modal('show');
+				return false;
+			}
+
+			if (inputValue === "") {
+				swal.showInputError("You need to write something!");
+				return false;
+			} else {
+				var url = "/saveCup";
+				var msg = "Cup ";
+				var id = "#ifgproductcup";
+				test(inputValue, url, msg, id, '1');
+			}
+			$('#ifg-modal').modal('show');
+		});
+
+	}
+
+	//
+	function ifgProSize() {
+		$('#ifg-modal').modal('hide');
+		swal({
+			title : "Add New Size!",
+			text : 'Type New Size:',
+			type : 'input',
+			showCancelButton : true,
+			closeOnConfirm : false,
+			animation : "slide-from-top",
+			inputPlaceholder : "Size",
+		}, function(inputValue) {
+			$('#ifgproductsize option').each(function(e) {
+				if (this.text == inputValue) {
+					swal.showInputError("Already Exists in the List!");
+					inputValue = false;
+					return inputValue = false;
+					return false;
+					return;
+				} else {
+					productCategoryExist = false;
+				}
+			});
+			if (inputValue === false) {
+				$('#ifg-modal').modal('show');
+				return false;
+			}
+
+			if (inputValue === "") {
+				swal.showInputError("You need to write something!");
+				return false;
+			} else {
+				var url = "/saveSize";
+				var msg = "Size";
+				var id = "#ifgproductsize";
+				test(inputValue, url, msg, id, '1');
+			}
+			$('#ifg-modal').modal('show');
+		});
+	}
+
+	function test(inputValue, url, msg, optId, brand) {
+		if (!productCategoryExist) {
+			$.ajax({
+				type : "post",
+				url : url,
+				data : {
+					'inputValue' : inputValue,
+					'brand' : brand
+				},
+				success : function(data) {
+				}
+			}).done(
+					function(data) {
+						if (data != 0) {
+							$(optId).append(
+									'<option value="' + data + '" selected="selected">'
+											+ inputValue + '</option>');
+							swal("Added!", msg + " Added!", "success");
+
+						} else {
+							swal("Oops", msg + " Creation Failed", "error");
+						}
+					}).error(function(data) {
+				swal("Oops", "We couldn't connect to the server!", "error");
+			});
+		}
+	};
+	
+	function checkMarketPric(){
+			var market=document.getElementById("ifgmarketretail").value;
+			/* var total=$('#ifgsum').val().toFixed(0); */
+			var total=parseFloat(document.getElementById("ifgsum").value).toFixed(0);
+			if(total>market){
+				swal("Market Retail Price can not be less than Total Price.");
+				$('#ifgmarketretail').val('');
+			}
+	
+		
+}
+
+</script>
+<script type="text/javascript" th:inline="javascript">
+	$(document).ready(function() {
+		//this calculates values automatically 
+		sumabc();
+		$("#ifgnum1, #trinum1").on("keydown keyup", function() {
+			sumabc();
+		});
+		$("#ifgmarketretail").on("change", function() {
+			var market=$('#ifgmarketretail').val();
+			/* var total=$('#ifgsum').val().toFixed(0); */
+			var total=parseFloat($('#ifgsum').val()).toFixed(0);
+			
+			
+		});
+		
+		
+	});
+
+	function sumabc() {
+		var num1 = $('#ifgnum1').val();
+		var num2=[[${tax.ifgGstTax}]];
+		
+		var result1 = parseInt(num1) * (parseInt(num2) / 100);
+		var result = parseInt(num1) + result1;
+		if (!isNaN(result)) {
+			$('#ifgsum').val(result.toFixed(2));
+			$('#ifggst').val(result1.toFixed(2));
+		}
+	};
+</script>
+
+<!--SMS Ends-->

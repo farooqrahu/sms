@@ -1,0 +1,1785 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: header">
+</head>
+
+
+<body class="fixed-left">
+	<!-- Begin page -->
+<div id="wrapper">
+	<div class="topbar" th:replace="header :: topbar"></div>
+	<div class="left side-menu" th:replace="header :: navigation"></div>
+	<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<div class="content-page">
+	<!-- Start content -->
+<div class="content">
+	<div class="container">
+
+
+
+
+
+		<div class="row">
+			<div class="col-lg-12 card-box">
+				<div class="panel panel-default panel-danger">
+					<div class="panel-heading">
+						<h3 class="panel-title">Order Placement Form</h3>
+					</div>
+
+					<div class="panel-body">
+						<ul class="nav nav-pills m-b-30" style="padding-left: 35%;">
+	<li class="active"><a href="#navpills-11"
+		data-toggle="tab" aria-expanded="true"
+		
+		class="btn waves-effect waves-light ifgtriwdth">SMS</a></li>
+	<li class=""><a href="#navpills-21" data-toggle="tab"
+		aria-expanded="false" 
+		class="btn waves-effect waves-light ifgtriwdth">Triumph</a></li>
+</ul>
+<div class="tab-content br-n pn">
+	<div id="navpills-11" class="tab-pane active">
+		<div class="row">
+			<div class="col-md-12">
+
+
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="">
+							<h1 class="text-muted m-t-0 m-b-20 cen"
+								style="color: rgb(179, 1, 105)">
+		<b>New SMS Order</b>
+	</h1>
+	<input type="hidden" value="ifg">
+	<form id="myformIFG" role="form" th:action="@{/saveOrder}" th:object="${entity}" method="POST">
+		<input type="hidden" class="form-control" id="orderbrand"  value="1" th:field="*{order.brand.brandId}" />
+		<div class="row">
+			<div class="col-sm-12" style="margin-top: 0%;">
+
+				<span style="color: green;"
+					th:text="${responseMessage}"></span>
+				<div id="table" class="table-editable">
+				<table id="ordercreation"
+							class="table table-striped table-bordered tg dataTable no-footer">
+	<tbody>
+		<tr>
+		<th class="tg-9hbo" colspan="2"
+								style="border-top-left-radius: 20px;">Order
+								No. <span class="fonbold"> <input
+									class="form-control" id="ordercode"
+									th:field="*{order.orderCode}" disabled=""
+									style="text-align: center; width: 100%;"
+									type="text" maxlength="12"></span>
+							</th>
+			
+			<th class="tg-9hbo" colspan="10" rowspan="2">Customer Name: <span class="fonbold"><select id="customername" required
+								th:field="*{customer.customerId}"
+								onChange="transFunction()"
+								class="form-control select2 dropdown-toggle btn-custom2">
+									<option value="">Please Select Customer</option>
+									<option th:each="customerList : ${customerList}"
+										th:value="${customerList.customerId}"
+										th:text="${customerList.name}"></option>
+							</select></span><br /> Address: <span class="fonbold"><textarea
+										class="form-control" id="customeraddress"
+										style="text-align: center; width: 100%;"
+										type="text" readonly></textarea></span></th>
+			<th class="tg-9hbo" colspan="3" rowspan="1" style="border-top-right-radius: 20px;">Date: 	<span class="fonbold"> <input
+									id="orderdateifg" type="text" maxlength="10"
+									data-mask="99/99/9999" class="form-control"
+									style="text-align: center; width: 100%;"
+									type="text" maxlength="12"
+									th:field="*{orderCreationDate}"
+									placeholder="mm/dd/yyyy">
+							</span></th>
+		</tr>
+		<tr>
+				<th class="tg-9hbo" colspan="2">Person 
+								Contacted:<span> <input required
+									id="orderpersoncontacted" class="form-control"
+									th:field="*{order.personContact}"
+									style="text-align: center; width: 100%;"
+									type="text" >
+							</span>
+							</th>
+			<th class="tg-9hbo" colspan="3">Visit Time
+								<div class="input-group clockpicker "
+									data-autoclose="true">
+									<input required class="form-control" id="ordertime"
+										type="text" th:field="*{time}"> <span
+										class="input-group-addon"> <span
+										class="glyphicon glyphicon-time"></span>
+									</span>
+								</div>
+							</th>
+		</tr>
+		<tr>
+			<th class="tg-9hbo" colspan="2">Transport: <span class="fonbold"><a id="transportId" 
+								class="btn btn-primary waves-effect waves-light R"><i
+									class="fa fa-plus"> New</i></a> <select required
+								id="transportName"
+								th:field="*{order.transport.transportId}"
+								required="required"
+								class="form-control select2 dropdown-toggle btn-custom2">
+									<option value="">Please Select Transport</option>
+									<option
+										th:each="transportList : ${transportList}"
+										th:value="${transportList.transportId}"
+										th:text="${transportList.name}"></option>
+							</select></span></th>
+			<th class="tg-9hbo" colspan="10">Remarks: <span>
+									<input id="orderremarks" class="form-control"
+									th:field="*{order.remarks}"
+									style="text-align: center; width: 100%;"
+									type="text">
+							</span></th>
+			<th class="tg-bobw" rowspan="4" style="    width: 70px;">Total</th>
+			<th class="tg-bobw" rowspan="4" style="    width: 70px;">Price Per Piece</th>
+			<th class="tg-bobw" rowspan="4" style="    width: 70px;">Total amount</th>
+		</tr>
+		<tr>
+			<th class="tg-bobw" rowspan="3" style="    width: 190px;">Article</th>
+			<th class="tg-bobw" rowspan="3" style="    width: 145px;">Color</th>
+			<th class="tg-bobw small" rowspan="3" style="    width: 100px;">Cup</th>
+			<th class="tg-amwm" colspan="9">Size</th>
+		</tr>
+		<tr>
+			<td class="tg-amwm" colspan="2">S</td>
+			<td class="tg-amwm" colspan="2">M</td>
+			<td class="tg-amwm" colspan="2">L</td>
+			<td class="tg-amwm" colspan="3">XL</td>
+		</tr>
+		<tr>
+			<td class="tg-yw4l">30/65</td>
+			<td class="tg-yw4l">32/70</td>
+			<td class="tg-yw4l">34/75</td>
+			<td class="tg-yw4l">36/80</td>
+			<td class="tg-yw4l">38/85</td>
+			<td class="tg-yw4l">40/90</td>
+			<td class="tg-yw4l">42/95</td>
+			<td class="tg-yw4l">44/100</td>
+			<td class="tg-yw4l">46/105</td>
+		</tr>
+		
+		<tr class="hide">
+								<td class="tg-yw4l" id="productNameId"
+									style="max-width: 153px;"><select 
+									th:field="*{orderDetailList[0].productName.productNameId}"
+									class="form-control articleClass select2 dropdown-toggle btn-custom2">
+										<option value="0">Select</option>
+										<option
+											th:each="productNameList : ${productNameList}"
+											th:value="${productNameList.productNameId}"
+											th:text="${productNameList.name}"></option>
+								</select>
+								</td>
+
+								<td class="tg-yw4l" style="max-width: 110px;"><select disabled="disabled"
+									class="form-control" id="colorNameId"
+									th:field="*{orderDetailList[0].color.colorId}"
+									class="form-control colorClass select2 dropdown-toggle btn-custom2">
+										<option value="">Select</option>
+
+								</select></td>
+								<td class="tg-yw4l select"
+									style="max-width: 90px;"><select disabled="disabled"
+									class="form-control" id="cupName"
+									th:field="*{orderDetailList[0].cup.cupId}"
+									class="form-control cupClass select2 dropdown-toggle btn-custom2">
+										<option value="">Select</option>
+								</select></td>
+
+								<td class="tg-yw4l"><input  
+									style="max-width: 32px;" id="add1" disabled=""
+									class="size 30"
+									th:field="*{orderDetailList[0].s30_65}"
+									type="text" maxlength="3"></td>
+								<td class="tg-yw4l"><input  
+									style="max-width: 32px;" id="add2" disabled=""
+									class="size 32"
+									th:field="*{orderDetailList[0].s30_70}"
+									type="text" maxlength="3"></td>
+								<td class="tg-yw4l"><input  
+									style="max-width: 32px;" id="add3" disabled=""
+									class="size 34"
+									th:field="*{orderDetailList[0].s34_75}"
+									type="text" maxlength="3"></td>
+								<td class="tg-yw4l"><input  
+									style="max-width: 32px;" id="add4" disabled=""
+									class="size 36"
+									th:field="*{orderDetailList[0].s36_80}"
+									type="text" maxlength="3"></td>
+								<td class="tg-yw4l"><input  
+									style="max-width: 32px;" id="add5" disabled=""
+									class="size 38"
+									th:field="*{orderDetailList[0].s38_85}"
+									type="text" maxlength="3"></td>
+								<td class="tg-yw4l"><input  
+									style="max-width: 32px;" id="add6" disabled=""
+									class="size 40"
+									th:field="*{orderDetailList[0].s40_90}"
+									type="text" maxlength="3"></td>
+								<td class="tg-yw4l"><input  
+									style="max-width: 32px;" id="add7" disabled=""
+									class="size 42"
+									th:field="*{orderDetailList[0].s42_95}"
+									type="text" maxlength="3"></td>
+								<td class="tg-yw4l"><input  
+									style="max-width: 32px;" id="add8" disabled=""
+									class="size 44"
+									th:field="*{orderDetailList[0].s44_100}"
+									type="text" maxlength="3"></td>
+								<td class="tg-yw4l"><input  
+									style="max-width: 32px;" id="add9" disabled=""
+									class="size 46"
+									th:field="*{orderDetailList[0].s46_105}"
+									type="text" maxlength="3"></td>
+								<td id="total1" class="tg-yw4l"><input disabled=""
+									type="text" class="total" disabled="disabled"
+									style="max-width: 45px;" id="totalQuantity"
+									th:field="*{orderDetailList[0].totalQuantity}"></td>
+								<td id="pricepp" class="tg-yw4l"><input 
+									style="max-width: 45px;" type="text"
+									class="priceperp" disabled="disabled"
+									id="priceperp"></td>
+								<td id="totalAmount" class="tg-yw4l"><input 
+									style="max-width: 45px;" type="text"
+									class="totalamount" disabled="disabled"
+									id="tAmount"><span
+									class="table-remove glyphicon glyphicon-remove buttons-remove"></span></td>
+							</tr>
+		
+	</tbody>
+</table>
+						<div
+							class="col-md-12 table table-striped table-bordered tg dataTable no-footer"
+							style="width: 244px; float: right;">
+							Total Quantity: <input type="text" id="allTotal"
+								class="" disabled="disabled"
+								style="width: 135px; border: 0px; float: right; text-align: center;
+/* border-radius: 1px; */ font-weight: bolder;">
+						</div>
+						<br /> <br />
+						<div
+							class="col-md-12 table table-striped table-bordered tg dataTable no-footer"
+							style="width: 244px; float: right;">
+							Total Amount : <input type="text"
+								id="allTotalamount" class="" disabled="disabled"
+								style="width: 135px; border: 0px; float: right; text-align: center;
+/* border-radius: 1px; */ font-weight: bolder;">
+				</div>
+					</div>
+
+					<span
+						class="table-add label label-primary pull-right ion-plus">
+						Add</span>
+
+				</div>
+				<div class="row concent">
+					<div class="col-md-4">
+						<button
+							class="btn btn-4 btn-4b waves-effect icon-arrow-left span3"
+							onclick="location.href='index.html';">Back</button>
+					</div>
+					<div class="col-md-4">
+						<button type="reset"
+							class="btn btn-4 waves-effect span3"
+							onclick="$('#ordercreation')[0].reset();">
+							<span>Reset</span>
+						</button>
+					</div>
+					<div class="col-md-4">
+						<button id="export-btn" type="submit"
+							class="btn btn-4 btn-4a waves-effect icon-arrow-right span3">Save</button>
+
+						<!-- <button id="export-btn" onclick="postData();"
+class="btn btn-4 btn-4a waves-effect icon-arrow-right span3">Save</button> -->
+										</div>
+									</div>
+
+</form>
+								</div>
+
+							</div>
+
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+<!-- ============================================================== -->
+<!--Triumph Panel-->
+<!-- ============================================================== -->
+
+
+<div id="navpills-21" class="tab-pane">
+	<div class="row">
+		<div class="col-sm-12">
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="">
+						<h1 class="text-muted m-t-0 m-b-20 cen"
+							style="color: red;">
+		<b>New Triumph Order</b>
+	</h1>
+	<input type="hidden" value="triumph">
+	
+	<form id="myformTri" role="form"
+		th:action="@{/saveOrder}" th:object="${entity}"
+		method="POST">
+		<div class="row">
+			<div class="col-sm-12">
+
+				<span style="color: green;"
+					th:text="${responseMessage}"></span>
+				<div id="table" class="table-editable">
+				<table id="ordercreationTri"
+						class="table table-striped table-bordered tg dataTable no-footer">
+	<tbody>
+		<tr>
+		<th class="tg-9hbo" colspan="2"
+								style="border-top-left-radius: 20px;">Order
+								No. <span class="fonbold"> <input
+									class="form-control" id="ordercode"
+									th:field="*{order.orderCode}" disabled=""
+									style="text-align: center; width: 100%;"
+									type="text" maxlength="12"></span>
+							</th>
+			
+			<th class="tg-9hbo" colspan="10" rowspan="2">Customer Name: <span class="fonbold"><select id="customernametri" required
+								th:field="*{customer.customerId}"
+								onChange="transFunctionTri()"
+								class="form-control select2 dropdown-toggle btn-custom2">
+									<option value="">Please Select Customer</option>
+									<option th:each="customerList : ${customerList}"
+										th:value="${customerList.customerId}"
+										th:text="${customerList.name}"></option>
+							</select></span><br /> Address: <span class="fonbold"> <textarea
+										class="form-control" id="customeraddresstri"
+										style="text-align: center; width: 100%;"
+										type="text" readonly></textarea></span></th>
+			<th class="tg-9hbo" colspan="3" rowspan="1" style="border-top-right-radius: 20px;">Date: 	<span class="fonbold"> <input
+									id="orderdatetri" type="text" maxlength="10"
+									data-mask="99/99/9999" class="form-control"
+									style="text-align: center; width: 100%;"
+									type="text" maxlength="12" class="form-control"
+									th:field="*{orderCreationDate}"
+									placeholder="mm/dd/yyyy">
+							</span></th>
+		</tr>
+		<tr>
+				<th class="tg-9hbo" colspan="2">Person
+								Contacted:<span> <input
+									id="orderpersoncontacted" class="form-control"
+									th:field="*{order.personContact}" 
+									style="text-align: center; width: 100%;"
+									type="text">
+							</span>
+							</th>
+			<th class="tg-9hbo" colspan="3">Visit Time
+								<div class="input-group clockpicker "
+									data-autoclose="true">
+									<input class="form-control" id="ordertime"
+										type="text" th:field="*{time}"> <span
+										class="input-group-addon"> <span
+										class="glyphicon glyphicon-time"></span>
+									</span>
+								</div>
+							</th>
+		</tr>
+		<tr>
+			<th class="tg-9hbo" colspan="2">Transport: <span class="fonbold"><a id="transportIdTri"
+								class="btn btn-primary waves-effect waves-light R"><i
+									class="fa fa-plus"> New</i></a> <select
+								id="transportNameTri"
+								th:field="*{order.transport.transportId}"
+								required="required"
+								class="form-control select2 dropdown-toggle btn-custom2">
+									<option value="">Please Select Transport</option>
+									<option
+										th:each="transportList : ${transportList}"
+										th:value="${transportList.transportId}"
+										th:text="${transportList.name}"></option>
+							</select></span></th>
+			<th class="tg-9hbo" colspan="10">Remarks: <span>
+									<input id="orderremarks" class="form-control"
+									th:field="*{order.remarks}"
+									style="text-align: center; width: 100%;"
+									type="text">
+							</span></th>
+			<th class="tg-bobw" rowspan="4" style="    width: 70px;">Total</th>
+			<th class="tg-bobw" rowspan="4" style="    width: 70px;">Price Per Piece</th>
+			<th class="tg-bobw" rowspan="4" style="    width: 70px;">Total amount</th>
+		</tr>
+		<tr>
+			<th class="tg-bobw" rowspan="3" style="    width: 190px;">Article</th>
+			<th class="tg-bobw" rowspan="3" style="    width: 145px;">Color</th>
+			<th class="tg-bobw small" rowspan="3">Cup</th>
+			<th class="tg-amwm" colspan="9">Size</th>
+		</tr>
+		<tr>
+			<td class="tg-amwm" colspan="2">S</td>
+			<td class="tg-amwm" colspan="2">M</td>
+			<td class="tg-amwm" colspan="2">L</td>
+			<td class="tg-amwm" colspan="3">XL</td>
+		</tr>
+		<tr>
+			<td class="tg-yw4l">30/65</td>
+			<td class="tg-yw4l">32/70</td>
+			<td class="tg-yw4l">34/75</td>
+			<td class="tg-yw4l">36/80</td>
+			<td class="tg-yw4l">38/85</td>
+			<td class="tg-yw4l">40/90</td>
+			<td class="tg-yw4l">42/95</td>
+			<td class="tg-yw4l">44/100</td>
+			<td class="tg-yw4l">46/105</td>
+		</tr>
+		<input type="hidden" class="form-control" id="orderbrandTri"  value="1"	 th:field="*{order.brand.brandId}">
+<tr class="hide">
+								<td class="tg-yw4l" id="productNameId"
+									style="max-width: 153px;"><select
+									th:field="*{orderDetailList[0].productName.productNameId}"
+									class="form-control articleClass select2 dropdown-toggle btn-custom2">
+										<option value="">Select</option>
+										<option
+											th:each="productNameList : ${productNameListTri}"
+											th:value="${productNameList.productNameId}"
+											th:text="${productNameList.name}"></option>
+								</select></td>
+
+								<td class="tg-yw4l" style="max-width: 110px;"><select disabled=""
+									class="form-control" id="colorNameId"
+									th:field="*{orderDetailList[0].color.colorId}"
+									class="form-control colorClass select2 dropdown-toggle btn-custom2">
+										<option value="">Select</option>
+
+								</select></td>
+								<td class="tg-yw4l select"
+									style="max-width: 90px;"><select disabled=""
+									class="form-control" id="cupName"
+									th:field="*{orderDetailList[0].cup.cupId}"
+									class="form-control cupClass select2 dropdown-toggle btn-custom2">
+										<option value="">Select</option>
+								</select></td>
+
+								<td class="tg-yw4l"><input disabled=""
+									style="max-width: 32px;" id="add1"
+									class="sizetri 30tri"
+									th:field="*{orderDetailList[0].s30_65}"
+									type="text" maxlength="3"></td>
+								<td class="tg-yw4l"><input disabled=""
+									style="max-width: 32px;" id="add2"
+									class="sizetri 32tri"
+									th:field="*{orderDetailList[0].s30_70}"
+									type="text" maxlength="3"></td>
+								<td class="tg-yw4l"><input disabled=""
+									style="max-width: 32px;" id="add3"
+									class="sizetri 34tri"
+									th:field="*{orderDetailList[0].s34_75}"
+									type="text" maxlength="3"></td>
+								<td class="tg-yw4l"><input disabled=""
+									style="max-width: 32px;" id="add4"
+									class="sizetri 36tri"
+									th:field="*{orderDetailList[0].s36_80}"
+									type="text" maxlength="3"></td>
+								<td class="tg-yw4l"><input disabled=""
+									style="max-width: 32px;" id="add5"
+									class="sizetri 38tri"
+									th:field="*{orderDetailList[0].s38_85}"
+									type="text" maxlength="3"></td>
+								<td class="tg-yw4l"><input disabled=""
+									style="max-width: 32px;" id="add6"
+									class="sizetri 40tri"
+									th:field="*{orderDetailList[0].s40_90}"
+									type="text" maxlength="3"></td>
+								<td class="tg-yw4l"><input disabled=""
+									style="max-width: 32px;" id="add7"
+									class="sizetri 42tri"
+									th:field="*{orderDetailList[0].s42_95}"
+									type="text" maxlength="3"></td>
+								<td class="tg-yw4l"><input disabled=""
+									style="max-width: 32px;" id="add8"
+									class="sizetri 44tri"
+									th:field="*{orderDetailList[0].s44_100}"
+									type="text" maxlength="3"></td>
+								<td class="tg-yw4l"><input disabled=""
+									style="max-width: 32px;" id="add9"
+									class="sizetri 46tri"
+									th:field="*{orderDetailList[0].s46_105}"
+									type="text" maxlength="3"></td>
+								<td id="total1" class="tg-yw4l"><input 
+									type="text" class="totaltri" disabled="disabled"
+									style="max-width: 45px;" id="totalQuantitytri"
+									th:field="*{orderDetailList[0].totalQuantity}"></td>
+								<td id="pricepp" class="tg-yw4l"><input
+									style="max-width: 45px;" type="text"
+									class="priceperp" disabled="disabled"
+									id="priceperp"></td>
+								<td id="totalAmounttri" class="tg-yw4l"><input
+									style="max-width: 45px;" type="text"
+									class="totalamounttri" disabled="disabled"
+									id="tAmounttri"><span
+									class="table-remove glyphicon glyphicon-remove buttons-remove"></span></td>
+							</tr>
+	</tbody>
+</table>
+					
+
+
+
+
+					<div id="table" class="table-editable">
+						<div
+							class="col-md-12 table table-striped table-bordered tg dataTable no-footer"
+							style="width: 244px; float: right;">
+							Total Quantity: <input type="text" id="allTotaltri"
+								class="" disabled="disabled"
+								style="width: 135px; border: 0px; float: right; text-align: center;
+/* border-radius: 1px; */ font-weight: bolder;">
+						</div>
+						<br /> <br />
+						<div
+							class="col-md-12 table table-striped table-bordered tg dataTable no-footer"
+							style="width: 244px; float: right;">
+							Total Amount : 
+				<input type="text" id="allTotalamounttri" class="" disabled="disabled" style="width: 135px; border: 0px; float: right; text-align: center;
+/* border-radius: 1px; */ font-weight: bolder;">
+						</div>
+					</div>
+
+					<span
+						class=" TritableAdd label label-primary pull-right ion-plus" style="    color: #fff;
+cursor: pointer;
+position: absolute;
+font-size: 16px;">
+						Add</span>
+
+				</div>
+				<div class="row concent">
+					<div class="col-md-4">
+						<button
+							class="btn btn-4 btn-4b waves-effect icon-arrow-left span3"
+							onclick="location.href='index.html';">Back</button>
+					</div>
+					<div class="col-md-4">
+						<button type="reset"
+							class="btn btn-4 waves-effect span3"
+							onclick="$('#ordercreation')[0].reset();">
+							<span>Reset</span>
+						</button>
+					</div>
+					<div class="col-md-4">
+						<button id="export-btn" type="submit"
+							class="btn btn-4 btn-4a waves-effect icon-arrow-right span3">Save</button>
+
+						<!-- <button id="export-btn" onclick="postData();"
+class="btn btn-4 btn-4a waves-effect icon-arrow-right span3">Save</button> -->
+														</div>
+													</div>
+
+
+												</div>
+
+											</div>
+
+										</form>
+									</div>
+</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<!-- container -->
+
+</div>
+<!-- content -->
+
+<div th:replace="footer :: copy"></div>
+
+<!--   Right Sidebar -->
+<div class="side-bar right-bar nicescroll"
+	th:replace="footer :: rightbar"></div>
+<!-- /Right-bar -->
+
+</div>
+<!-- END wrapper -->
+</div>
+<div th:replace="footer :: script"></div>
+<script type="text/javascript">
+$(document).ready(
+		function() {
+			$('#ordercreation').dataTable();
+			$('#ordercreationTri').dataTable();
+			//Clock Picker
+			$('.clockpicker').clockpicker({
+				donetext : 'Done'
+			});
+
+			$('#single-input').clockpicker({
+				placement : 'bottom',
+				align : 'left',
+				autoclose : true,
+				'default' : 'now'
+			});
+			$('#check-minutes').click(
+					function(e) {
+						// Have to stop propagation here
+						e.stopPropagation();
+						$("#single-input").clockpicker(
+								'show').clockpicker(
+								'toggleView', 'minutes');
+					});
+
+		});
+
+/* Order Form Data */
+function postData() {
+	var tablerow = $TABLE.find('tr:not(:hidden)');
+	var $rows = tablerow;
+	var headers = [];
+	var orderDetail = [];
+
+	// .splice(0, 5) Get the headers (add special header logic here)
+	$($rows.shift()).find('th:not(:empty)').each(
+			function() {
+				headers.push($(this).attr('id'));
+			});
+
+	// Turn all existing rows into a loopable array
+	var keyy;
+	var valuee;
+	var obj = {};
+	var obj = {};
+	var count = 0;
+	$rows.each(function() {
+		var $td = $(this).find('td');
+		var h = {};
+		// Use the headers from earlier to name our hash keys
+		headers.forEach(function(header, i) {
+
+			keyy = headers[i];
+			valuee = $td.eq(i).find(':input').val();
+			obj[keyy] = valuee;
+
+		});
+		//orderDetail.push(h);
+		var myJsonString = JSON.stringify(obj);
+		
+		count++;
+
+	});
+
+}
+</script>
+<script>
+$('.size' ).on("keydown keyup",
+			
+		function() {
+			var sum = 0;
+
+			var totalSize = parseInt($(this).closest("tr")
+					.find(".size").val());
+			var total = parseInt($(this).closest("tr")
+						.find(".total").val());
+			
+			var pricePerPiece = parseInt($(this).closest(
+					"tr").find(".priceperp").val());
+
+			$(this).closest("tr").find(".size").each(
+					function() {
+						sum += +$(this).val();
+					});
+			//alert(sum);
+			var check = $(this).closest("tr")
+					.find(".total").val(sum).attr('value',
+							sum);
+			var sumb = sum * pricePerPiece;
+
+			//alert(sumb);
+			var suma = 0;
+			$(".total").each(function() {
+				suma += +$(this).val();
+			});
+			$(this).closest("tr").find(".totalamount").val(
+					sumb).attr('value', sumb);
+			$("#allTotal").val(suma);
+
+			var grandAmount = 0;
+			$(".totalamount").each(function() {
+				grandAmount += +$(this).val();
+			});
+			$("#allTotalamount").val(grandAmount);
+
+		});
+
+
+$('.sizetri').on("keydown keyup",
+		function() {
+	var sum = 0;
+
+	var totalSize = parseInt($(this).closest("tr")
+			.find(".sizetri").val());
+	var total = parseInt($(this).closest("tr")
+				.find(".totaltri").val());
+	
+	var pricePerPiece = parseInt($(this).closest(
+			"tr").find(".priceperp").val());
+
+	$(this).closest("tr").find(".sizetri").each(
+			function() {
+				sum += +$(this).val();
+			});
+	//alert(sum);
+	var check = $(this).closest("tr")
+			.find(".totaltri").val(sum).attr('value',
+					sum);
+	var sumb = sum * pricePerPiece;
+
+	//alert(sumb);
+	var suma = 0;
+	$(".totaltri").each(function() {
+		suma += +$(this).val();
+	});
+	$(this).closest("tr").find(".totalamounttri").val(
+			sumb).attr('value', sumb);
+	$("#allTotaltri").val(suma);
+
+	var grandAmount = 0;
+	$(".totalamounttri").each(function() {
+		grandAmount += +$(this).val();
+	});
+	$("#allTotalamounttri").val(grandAmount);
+
+});
+window.onload = function() {
+	//var productCategoryExist = false;
+	document.querySelector('#transportId').onclick = function() {
+		swal(
+				{
+					title : "Add Transport Name!",
+					text : 'Type Transport Name:',
+					type : 'input',
+					showCancelButton : true,
+					closeOnConfirm : false,
+					animation : "slide-from-top",
+					inputPlaceholder : "Transport Name",
+				},
+				function(inputValue) {
+					$('#transportName option').each(function(e) {
+						if (this.text == inputValue) {
+							swal.showInputError("Already Exists in the List!");
+							inputValue = false;
+							return inputValue = false;
+							return false;
+							return;
+						}
+						
+						//else
+							//{productCategoryExist = false;}
+					});
+					
+
+					if (inputValue === false)
+						return false;
+
+					if (inputValue === "") {
+						swal
+								.showInputError("You need to write something!");
+						return false;
+					} else {
+						var url = "/saveTransportCategory";
+						var msg = "Transport";
+						var id = "#transportName";
+						test(inputValue, url, msg, id);
+					}
+
+				});
+	};
+	document.querySelector('#transportIdTri').onclick = function() {
+		swal(
+				{
+					title : "Add Transport Name!",
+					text : 'Type Transport Name:',
+					type : 'input',
+					showCancelButton : true,
+					closeOnConfirm : false,
+					animation : "slide-from-top",
+					inputPlaceholder : "Transport Name",
+				},
+				function(inputValue) {
+					$('#transportNameTri option').each(function(e) {
+						if (this.text == inputValue) {
+							swal.showInputError("Already Exists in the List!");
+							inputValue = false;
+							return inputValue = false;
+							return false;
+							return;
+						}
+					});
+
+					if (inputValue === false)
+						return false;
+
+					if (inputValue === "") {
+						swal
+								.showInputError("You need to write something!");
+						return false;
+					} else {
+						var url = "/saveTransportCategory";
+						var msg = "Transport";
+						var id = "#transportNameTri";
+						test(inputValue, url, msg, id);
+					}
+
+				});
+	};
+
+};
+
+function test(inputValue, url, msg, optId) {
+	$
+			.ajax({
+				type : "post",
+				url : url,
+				data : "inputValue=" + inputValue,
+				success : function(data) {
+				}
+			})
+			.done(
+					function(data) {
+						if (data != 0) {
+							$(optId).append(
+									'<option value="' + data + '" selected="selected">'
+											+ inputValue
+											+ '</option>');
+							swal("Success", msg
+									+ "Transport Added !",
+									"success");
+
+						} else {
+							swal("Oops", msg
+									+ "Failed, Please Try Again!",
+									"error");
+						}
+					})
+			.error(
+					function(data) {
+						swal(
+								"Oops",
+								"We couldn't connect to the server!",
+								"error");
+					});
+};
+
+function transFunction() {
+	var a = $('#customername').val();
+	document.getElementById("orderbrand").value = 1 ;
+	if (a === "") {
+		swal("", "An Error Occured, please try again", "error");
+		return false;
+	} else {
+		var url = "/getCustomerAddress";
+		var msg = "Customer";
+		var id = "#customeraddress";
+		check(a, url, msg, id);
+		/* swal("Added!", "Category Name Added!", "success"); */
+	}
+
+};
+function transFunctionTri() {
+	var a = $('#customernametri').val();
+	document.getElementById("orderbrandTri").value = 2 ;
+	
+	if (a === "") {
+		swal("", "Error Occured, please try again", "error");
+		return false;
+	} else {
+		var url = "/getCustomerAddress";
+		var msg = "Customer";
+		var id = "#customeraddresstri";
+		check(a, url, msg, id);
+		/* swal("Added!", "Category Name Added!", "success"); */
+	}
+
+};
+function check(a, url, msg, optId) {
+	$
+			.ajax({
+				type : "post",
+				url : url,
+				data : "inputValue=" + a,
+				success : function(data) {
+				}
+			})
+			.done(function(data) {
+				if (data != 0) {
+					$(optId).val(data);
+					} else {
+					$(optId).val("");
+				}
+			})
+			.error(
+					function(data) {
+						swal("Oops", msg
+								+ "Failed, Please Try Again!",
+								"error");
+					});
+};
+
+$(".articleClass").change(
+		function() {
+			var a = parseInt($(this).closest("tr").find(
+					".articleClass").val());
+			var b = $(this).closest("tr").find(
+					".colorClass");
+			var c = $(this).closest("tr").find(".articleClass")
+
+			if (a === "") {
+				swal("Please Select an Article", "", "error");
+				return false;
+			} else {
+				var url = "/getColor";
+				var msg = "Color";
+				productSelect(a, url, msg, b);
+				/* swal("Added!", "Category Name Added!", "success"); */
+				$(".colorClass").removeAttr('disabled');
+			}
+
+		});
+function productSelect(a, url, msg, optId) {
+
+	$
+			.ajax({
+				type : "post",
+				url : url,
+				data : "inputValue=" + a,
+				dataType : 'json',
+				success : function(data) {
+				}
+			})
+			.done(
+					function(data) {
+						if (data != 0) {
+							var colorId = "";
+							var name = "";
+							$(optId).empty();
+							$
+									.each(
+											data,
+											function(i,
+													item) {
+
+												var colorId = item.colorId;
+												var name = item.name;
+												$(optId)
+														.append(
+																$(
+																		'<option value="'+item.colorId+'">')
+																		.text(
+																				item.name)
+																		.attr(
+																				'id',
+																				item.colorId));
+												
+											});
+							
+						} else {
+							swal("", "This product is currently unavailable", "error");
+							//$(".articleClass").prop('selectedIndex', 0);
+						}
+					
+					})
+			.error(
+					function(data) {
+						swal("Oops", "An Error Occured, Please Try Again!",
+								"error");
+					});
+};
+
+$(".colorClass")
+		.click(
+				function() {
+					var a = parseInt($(this).closest("tr")
+							.find(".articleClass").val());
+					var b = $(this).closest("tr").find(
+							".cupClass");
+					
+					if (a === "") {
+						alert('Error');
+						return false;
+					} else {
+						var url = "/getCup";
+						var msg = "Cup";
+						colorSelect(a, url, msg, b);
+						$(".cupClass").removeAttr('disabled');
+						
+
+					}
+
+				});
+function colorSelect(a, url, msg, optId) {
+
+	$
+			.ajax({
+				type : "post",
+				url : url,
+				data : "inputValue=" + a,
+				dataType : 'json',
+				success : function(data) {
+				}
+			})
+			.done(
+					function(data) {
+
+						if (data != 0) {
+							$(optId).empty();
+							$
+									.each(
+											data,
+											function(i,
+													item) {
+
+												$(optId)
+														.append(
+																$(
+																		'<option value="'+item.cupId+'">')
+																		.text(
+																				item.name)
+																		.attr(
+																				'id',
+																				item.cupId));
+											});
+						} else {
+							swal("", "Please select Article first", "error");
+						//	$(this).closest("tr").find(".colorClass").prop('selectedIndex', 0);
+						}
+					})
+			.error(
+					function(data) {
+						swal("Oops", "An Error Occured, Please Try Again!",
+						"error");
+					});
+};
+$(".cupClass").click(
+		function() {
+			var articleId = parseInt($(this).closest("tr").find(".articleClass").val());
+			var colorId = parseInt($(this).closest("tr").find(".colorClass").val());
+			var cupId = parseInt($(this).closest("tr").find(".cupClass").val());			
+			var pricePerUnit = $(this).closest("tr").find(".priceperp");
+			//$(".size, .sizetri").removeAttr('disabled');
+			
+			if (articleId === "") {
+				alert('Error');
+				return false;
+			} else {
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg,colorId,cupId,pricePerUnit);
+		
+				$(this).closest("tr").find('.30, .32, .34, .36, .38, .40, .42, .44, .46, .30tri, .32tri, .34tri, .36tri, .38tri, .40tri, .42tri, .44tri, .46tri').trigger("change");
+				
+				
+				
+				
+				
+			}
+
+		});
+function getPrice(articleId, url, msg,colorId,cupId, optId) {
+	$.ajax({
+				type : "post",
+				url : url,
+				data :"inputValue=" + articleId
+				+ "&colorId=" + colorId
+				+ "&cupId=" + cupId,
+				dataType : 'json',
+				success : function(data) {
+				}
+			})
+			.done(function(data) {
+				debugger;
+				if (data != 0) {
+				/* $(optId).val(data); */
+				$(optId).val(data).attr('value', data);
+				
+			} else {alert("error");}})
+			.error(function(data) {
+						//swal("Oops","We couldn't connect to the server!","error");
+						
+			});
+};
+$(".30").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClass").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClass").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClass").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".30").val());
+			var sizeId = 1;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperp");
+			var size=30;
+			
+			//var parentTd = $(this).parentNode
+			
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";	
+				
+				quantitycheck(this,$(this).closest("tr").find(".total"), articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+				
+
+			}
+		});
+
+$(".32").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClass").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClass").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClass").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".32").val());
+			var sizeId = 2;
+			var size=32;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperp");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".total"), articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+$(".34").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClass").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClass").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClass").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".34").val());
+			var sizeId = 3;
+			var size=34;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperp");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".total"), articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+$(".36").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClass").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClass").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClass").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".36").val());
+			var sizeId = 4;
+			var size=36;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperp");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".total"), articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+$(".38").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClass").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClass").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClass").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".38").val());
+			var sizeId = 5;
+			var size=38;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperp");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".total"),articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+$(".40").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClass").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClass").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClass").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".40").val());
+			var sizeId = 6;
+			var size=40;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperp");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".total"),articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+$(".42").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClass").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClass").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClass").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".42").val());
+			var sizeId = 7;
+			var size=42;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperp");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".total"),articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+$(".44").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClass").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClass").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClass").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".44").val());
+			var sizeId = 8;
+			var size=44;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperp");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".total"),articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+		$(".46").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClass").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClass").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClass").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".46").val());
+			var sizeId = 9;
+			var size=46;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperp");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".total"),articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+		
+		$(".30tri").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClass").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClass").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClass").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".30tri").val());
+			var sizeId = 10;
+			var size=30;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperp");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".total"),articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+	$(".32tri").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClass").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClass").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClass").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".32tri").val());
+			var sizeId = 11;
+			var size=32;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperp");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".total"),articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+	$(".34tri").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClass").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClass").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClass").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".34tri").val());
+			var sizeId = 12;
+			var size=34;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperp");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".total"),articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+	$(".36tri").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClass").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClass").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClass").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".36tri").val());
+			var sizeId = 13;
+			var size=36;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperp");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".total"),articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+	$(".38tri").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClass").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClass").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClass").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".38tri").val());
+			var sizeId = 14;
+			var size=38;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperp");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".total"),articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+	$(".40tri").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClass").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClass").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClass").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".40tri").val());
+			var sizeId = 15;
+			var size=40;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperp");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".total"),articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+	$(".42tri").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClass").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClass").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClass").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".42tri").val());
+			var sizeId = 16;
+			var size=42;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperp");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".total"),articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+	$(".44tri").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClass").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClass").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClass").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".44tri").val());
+			var sizeId = 17;
+			var size=44;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperp");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".total"),articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+	$(".46tri").change(
+		function checkQuantity() {
+			var articleId = parseInt($(this).closest("tr")
+					.find(".articleClass").val());
+			var colorId = parseInt($(this).closest("tr")
+					.find(".colorClass").val());
+			var cupId = parseInt($(this).closest("tr")
+					.find(".cupClass").val());
+			var sizeVal = parseInt($(this).closest("tr")
+					.find(".46tri").val());
+			var sizeId = 18;
+			var size=46;
+			var pricePerUnit = $(this).closest("tr").find(
+			".priceperp");
+			if (articleId === "") {
+				swal("Oops", "An Error Occured, Please Try Again!",
+				"error");
+				return false;
+			} else {
+				var url = "/checkQuantity";
+				var msg = "Quantity";
+				quantitycheck(this,$(this).closest("tr").find(".total"),articleId, url, msg, colorId,
+						cupId, sizeId, sizeVal,size);
+				var url = "/getPrice";
+				var msg = "Price";
+				getPrice(articleId, url, msg, colorId,
+						pricePerUnit,cupId,sizeId);
+			}
+		});
+
+	function quantitycheck(tdSize,tdTotal, articleId, url, msg, colorId, cupId,
+		sizeId, sizeVal,size) {
+		//alert("inside check");
+		
+
+	$.ajax(
+					{
+						type : "post",
+						url : url,
+						data : "inputValue=" + articleId
+								+ "&colorId=" + colorId
+								+ "&cupId=" + cupId
+								+ "&sizeId=" + sizeId,
+						dataType : 'json',
+						success : function(data) {
+						}
+					})
+			.done(
+					function(data) {
+						//alert(data);
+					
+						if (data != 0) {
+							$(tdSize).removeAttr('disabled');
+							if (sizeVal > data) {
+								swal("LIMIT EXCEEDS", "Sorry, Avaliable Quantity : "+data,
+								"error");	
+								validateQuantity(tdSize,tdTotal,false,tdSize.value);
+								document
+										.getElementById("export-btn").disabled = true;
+								sizeVal = 0;
+							} else
+								document.getElementById("export-btn").disabled = false;
+							//swal("Size:"+size+" available in stock:"+data,"success");
+						} else {
+							//swal("Product Out of Stock", "Sorry, Quantity is unavailable", "error");
+							$(tdSize).attr('disabled','disabled');
+							validateQuantity(tdSize,tdTotal,false,tdSize.value);
+							$('#sizeId').val('');
+							$('#sizeVal').val('');
+						}
+					})
+			.error(
+					function(data) {
+						swal(
+								"Oops",
+								"We couldn't connect to the server!",
+								"error");
+					});
+		};
+
+	jQuery('#orderdateifg').datepicker({
+	autoclose : true,
+	todayHighlight : true
+		});
+		jQuery('#orderdatetri').datepicker({
+	autoclose : true,
+	todayHighlight : true
+		});
+		
+
+</script>
+
+<script>
+function validateQuantity(tdSize,tdTotal,isValid,amount){
+	if(!isValid){	
+		tdSize.value = null;
+		var newVal = tdTotal.val() - amount;
+		tdTotal.val(newVal);
+	}
+}
+</script>
+
+<script>
+
+
+  
+</script>
+
+
+</body>
+</html>
