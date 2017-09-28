@@ -77,6 +77,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/bootstrap/**").addResourceLocations("classpath:/static/bootstrap/3.1.0/");
 		registry.addResourceHandler("/jquery/**").addResourceLocations("classpath:/static/jquery/");
 		registry.addResourceHandler("/jqueryui/**").addResourceLocations("classpath:/static/jqueryui/");
+		registry.addResourceHandler("/img/**").addResourceLocations("classpath:/static/img/");
+		registry.addResourceHandler("/font-awesome/**").addResourceLocations("classpath:/static/font-awesome/");
 		registry.addResourceHandler("/images/**").addResourceLocations("classpath:/static/images/");
 		registry.addResourceHandler("/datepicker/**").addResourceLocations("classpath:/static/datepicker/");
 		registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/");
