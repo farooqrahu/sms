@@ -13,11 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name = "ROLES")
-public class Role {
-
-	@Id
-	@GeneratedValue
-	private Integer id;
+public class Role extends BaseEntityAudit{
 
 	private String name;
 
@@ -30,14 +26,6 @@ public class Role {
 
 	public void setUser(List<User> user) {
 		this.user = user;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getName() {

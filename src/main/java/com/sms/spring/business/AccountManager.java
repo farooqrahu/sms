@@ -120,11 +120,11 @@ public class AccountManager {
 		return roleService.findByName(rolename);
 	}
 
-	public User findUserById(int id) {
+	public User findUserById(Long id) {
 		return accountService.findUserById(id);
 	}
 
-	public ModelAndView deleteUser(int userId) {
+	public ModelAndView deleteUser(Long userId) {
 		AccountViewModel accountViewModel = new AccountViewModel();
 		ModelAndView model = new ModelAndView();
 		User user = accountService.findUserById(userId);
@@ -163,7 +163,7 @@ public class AccountManager {
 			accountViewModel = new AccountViewModel();
 			Role role = new Role();
 			role.setName("");
-			role.setId(0);
+			role.setId(0l);
 			accountViewModel.setRole(role);
 			return accountViewModel;
 		}
@@ -214,7 +214,7 @@ public class AccountManager {
 
 	}
 
-	public ModelAndView resetUserPassword(int userId) {		
+	public ModelAndView resetUserPassword(Long userId) {
 		AccountViewModel accountViewModel = new AccountViewModel();
 		ModelAndView model = new ModelAndView();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

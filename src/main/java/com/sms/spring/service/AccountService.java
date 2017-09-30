@@ -43,7 +43,7 @@ public class AccountService {
 		return userList;
 	}
 
-	public User findUserById(int userId) {
+	public User findUserById(Long userId) {
 		return userRepository.findUserById(userId);
 	}
 

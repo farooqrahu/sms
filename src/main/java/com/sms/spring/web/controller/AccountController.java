@@ -64,7 +64,7 @@ public class AccountController {
 			return accountManager.loadUserView(accountViewModel, new ModelAndView(),
 					GlobalConstants.MANAGEUSER_HTML_PAGE);
 		}*/
-		User user = accountManager.findUserById(Integer.parseInt(userId));
+		User user = accountManager.findUserById(Long.parseLong(userId));
 		accountViewModel.setRole(user.getRoles().iterator().next());
 		accountViewModel.setUser(user);
 		return accountManager.loadUserView(accountViewModel, new ModelAndView(), GlobalConstants.USER_MODALS_HTML_PAGE);
@@ -116,7 +116,7 @@ public class AccountController {
 	@RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
 	public ModelAndView deleteUser(@ModelAttribute("userIdDelete") String userId) {
 		// Soft Delete User
-		return accountManager.deleteUser(Integer.parseInt(userId));
+		return accountManager.deleteUser(Long.parseLong(userId));
 	}
 
 	public ModelAndView findByName(String rolename) {
@@ -149,7 +149,7 @@ public class AccountController {
 	@RequestMapping(value = "/resetUserPassword", method = RequestMethod.POST)
 	public ModelAndView resetUserPassword(@ModelAttribute("userIdReset") String userId) {
 		// Reset User Password
-		return accountManager.resetUserPassword(Integer.parseInt(userId));
+		return accountManager.resetUserPassword(Long.parseLong(userId));
 	}
 	
 	

@@ -71,7 +71,7 @@ public class SMSApplicationTest {
 	//@Test
 	public void createIFGOwener() {
 		User user = new User();
-		user.setId(0);
+		user.setId(0l);
 		user.setUsername("ifgowner");
 		String path=System.getProperty("user.dir").substring(0,2);
 		logger.info(path+"\\ifglog");
@@ -86,7 +86,7 @@ public class SMSApplicationTest {
 		if (role == null) {
 			logger.info("Crating Ifg Owner Role.");
 			role = new Role();
-			role.setId(0);
+			role.setId(0l);
 			role.setName("ROLE_SMS_OWNER");
 			// roleService.saveRole(role);
 		} else {
@@ -108,7 +108,7 @@ public class SMSApplicationTest {
 		User user = new User();
 
 		logger.info("Creating Ifg salesmanager and ROLE_SALE_MANAGER.");
-		user.setId(0);
+		user.setId(0l);
 		user.setUsername("salesmanager");
 		 user.setEmail("salemanager@ifg.com");
 		user.setEnabled(true);
@@ -118,7 +118,7 @@ public class SMSApplicationTest {
 		user.setPassword("pass");
 		if (roleService.findByName("ROLE_SALE_MANAGER") == null) {
 			Role newRole = new Role();
-			newRole.setId(0);
+			newRole.setId(0l);
 			newRole.setName("ROLE_SALE_MANAGER");
 			 roleService.saveRole(newRole);
 		} else {
@@ -133,7 +133,7 @@ public class SMSApplicationTest {
 		// User user = new User();
 
 		logger.info("Creating User Data Entry and ROLE_DATA_ENTRY.");
-		user.setId(0);
+		user.setId(0l);
 		user.setUsername("dataentryuser1");
 		// user.setEmail("dataentry@ifg.com");
 		user.setEnabled(true);
@@ -141,7 +141,7 @@ public class SMSApplicationTest {
 		user.setPassword("pass");
 		if (roleService.findByName("ROLE_DATA_ENTRY") == null) {
 			Role newRole = new Role();
-			newRole.setId(0);
+			newRole.setId(0l);
 			newRole.setName("ROLE_DATA_ENTRY");
 			// roleService.saveRole(newRole);
 		} else {

@@ -20,11 +20,8 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name = "USERS")
-public class User {
+public class User extends BaseEntityAudit {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
 
 	@Column(length = 20, unique = true)
 	private String username;
@@ -96,14 +93,6 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public Set<Role> getRoles() {

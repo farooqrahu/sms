@@ -1,15 +1,14 @@
 package com.sms.spring.repository;
 
-import java.util.List;
-
+import com.sms.spring.model.Role;
+import com.sms.spring.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sms.spring.model.Role;
-import com.sms.spring.model.User;
+import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
@@ -23,7 +22,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 
 	@Transactional
 	@Query("select U from User U where U.id=?1")
-	User findUserById(int userId);
+	User findUserById(Long userId);
 
 	@Transactional
 	@Query("select U from User U where U.employeeId=?1")
