@@ -27,154 +27,129 @@ import com.sms.spring.service.UserService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SMSApplication.class)
 @WebAppConfiguration
-/*@SqlGroup({
-    @Sql("classpath:test.sql"),  
-})*/
 public class SMSApplicationTest {
-	private static final Logger logger = Logger.getLogger(SMSApplicationTest.class);
-	@Autowired
-	private ApplicationContext ctx;
+    private static final Logger logger = Logger.getLogger(SMSApplicationTest.class);
+    @Autowired
+    private ApplicationContext ctx;
 
-	private JdbcTemplate template;
+    private JdbcTemplate template;
 
-	@Autowired
-	public void setDataSource(DataSource dataSource) {
-		template = new JdbcTemplate(dataSource);
-	}
+    @Autowired
+    public void setDataSource(DataSource dataSource) {
+        template = new JdbcTemplate(dataSource);
+    }
 
-	private static boolean isInitialized = false;
-	@Autowired
-	private RoleService roleService;
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	@Test
-	public void contextLoads() {
-		String path=System.getProperty("user.dir").substring(0,2);
-		logger.info(path+"\\ifglog"); 
-		File file = new File(path);
-	        if (!file.exists()) {
-	            if (file.mkdir()) {
+    private static boolean isInitialized = false;
+    @Autowired
+    private RoleService roleService;
+    @Autowired
+    private UserService userService;
 
-	                System.out.println("Directory is created!");
-	            } else {
-	                System.out.println("Failed to create directory!");
+    @Autowired
+    @Test
+    public void contextLoads() {
+        String path = System.getProperty("user.dir").substring(0, 2);
+        logger.info(path + "\\smslog");
+        File file = new File("/data/smslog/");
+        if (!file.exists()) {
+            if (file.mkdir()) {
 
-	            	logger.info("Directory is created!");
-	            
-	            }
-	        }
-	}
+                System.out.println("Directory is created!");
+            } else {
+                System.out.println("Failed to create directory!");
 
-	// Create SMS OWNER account.
-	//@Test
-	public void createIFGOwener() {
-		User user = new User();
-		user.setId(0l);
-		user.setUsername("ifgowner");
-		String path=System.getProperty("user.dir").substring(0,2);
-		logger.info(path+"\\ifglog");
+                logger.info("Directory is created!");
 
-		user.setEnabled(true);
-		user.setPassword("pass");
-		user.setEmployeeId("110");
-		user.setName("Ifg");
+            }
+        }
+    }
 
-		logger.info("Creating Ifg Owner and ROLE_SMS_OWNER.");
-		Role role = roleService.findByName("ROLE_SMS_OWNER");
-		if (role == null) {
-			logger.info("Crating Ifg Owner Role.");
-			role = new Role();
-			role.setId(0l);
-			role.setName("ROLE_SMS_OWNER");
-			// roleService.saveRole(role);
-		} else {
-			logger.info("ROLE_SMS_OWNER Already Defined.");
-		}
+    // Create SMS OWNER account.
+    public void createSmsOwner() {
+        User user = new User();
+        user.setId(0l);
+        user.setUsername("smsowner");
+        String path = System.getProperty("user.dir").substring(0, 2);
+        logger.info(path + "\\ifglog");
 
-		Set<Role> roles = new HashSet<Role>();
-		roles.add(role);
-		roles.add(roleService.findByName("ROLE_SMS_OWNER"));
-		user.setRoles(roles);
-		
-		//userService.save(user);
-	}
+        user.setEnabled(true);
+        user.setPassword("pass");
+        user.setEmployeeId("110");
+        user.setName("sms");
 
-	// Create Sales Manager account.
-	//@Test
-	public void createSalesManager() {
+        logger.info("Creating sms Owner and ROLE_SMS_OWNER.");
+        Role role = roleService.findByName("ROLE_SMS_OWNER");
+        if (role == null) {
+            logger.info("Crating sms Owner Role.");
+            role = new Role();
+            role.setId(0l);
+            role.setName("ROLE_SMS_OWNER");
+            // roleService.saveRole(role);
+        } else {
+            logger.info("ROLE_SMS_OWNER Already Defined.");
+        }
 
-		User user = new User();
+        Set<Role> roles = new HashSet<Role>();
+        roles.add(role);
+        roles.add(roleService.findByName("ROLE_SMS_OWNER"));
+        user.setRoles(roles);
 
-		logger.info("Creating Ifg salesmanager and ROLE_SALE_MANAGER.");
-		user.setId(0l);
-		user.setUsername("salesmanager");
-		 user.setEmail("salemanager@ifg.com");
-		user.setEnabled(true);
-		user.setEmployeeId("12");
-		user.setName("Sales Manager");
-		user.setTempPassword(false);
-		user.setPassword("pass");
-		if (roleService.findByName("ROLE_SALE_MANAGER") == null) {
-			Role newRole = new Role();
-			newRole.setId(0l);
-			newRole.setName("ROLE_SALE_MANAGER");
-			 roleService.saveRole(newRole);
-		} else {
-			logger.info("ROLE_SALE_MANAGER Already Defined.");
-		}
-		Set<Role> roles = new HashSet<>();
-		roles.add(roleService.findByName("ROLE_SALE_MANAGER"));
-		 user.setRoles(roles);
+        //userService.save(user);
+    }
 
-		// userService.save(user);
+    // Create Sales Manager account.
+    public void createManager() {
 
-		// User user = new User();
+        User user = new User();
 
-		logger.info("Creating User Data Entry and ROLE_DATA_ENTRY.");
-		user.setId(0l);
-		user.setUsername("dataentryuser1");
-		// user.setEmail("dataentry@ifg.com");
-		user.setEnabled(true);
-		user.setTempPassword(false);
-		user.setPassword("pass");
-		if (roleService.findByName("ROLE_DATA_ENTRY") == null) {
-			Role newRole = new Role();
-			newRole.setId(0l);
-			newRole.setName("ROLE_DATA_ENTRY");
-			// roleService.saveRole(newRole);
-		} else {
-			logger.info("ROLE_DATA_ENTRY Already Defined.");
-		}
-		// List<Role> roles = new ArrayList<Role>();
-		roles.add(roleService.findByName("ROLE_DATA_ENTRY"));
-		user.setRoles(roles);
+        logger.info("Creating sms manager and ROLE_MANAGER.");
+        user.setId(0l);
+        user.setUsername("manager");
+        user.setEmail("manager@sms.com");
+        user.setEnabled(true);
+        user.setEmployeeId("12");
+        user.setName("Manager");
+        user.setTempPassword(false);
+        user.setPassword("pass");
+        if (roleService.findByName("ROLE_MANAGER") == null) {
+            Role newRole = new Role();
+            newRole.setId(0l);
+            newRole.setName("ROLE_MANAGER");
+            roleService.saveRole(newRole);
+        } else {
+            logger.info("ROLE_MANAGER Already Defined.");
+        }
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleService.findByName("ROLE_MANAGER"));
+        user.setRoles(roles);
+        logger.info("Creating User Data Entry and ROLE_DATA_ENTRY.");
+        user.setId(0l);
+        user.setUsername("dataentryuser1");
+        // user.setEmail("dataentry@ifg.com");
+        user.setEnabled(true);
+        user.setTempPassword(false);
+        user.setPassword("pass");
+        if (roleService.findByName("ROLE_DATA_ENTRY") == null) {
+            Role newRole = new Role();
+            newRole.setId(0l);
+            newRole.setName("ROLE_DATA_ENTRY");
+        } else {
+            logger.info("ROLE_DATA_ENTRY Already Defined.");
+        }
+        roles.add(roleService.findByName("ROLE_DATA_ENTRY"));
+        user.setRoles(roles);
+    }
 
-		// userService.save(user);
+    @Test
+    public void runOnce() {
+        if (isInitialized)
+            return;
+        logger.info("Initializing database");
 
-		/*	List<UserDetail> list = userService.findDataEntryUserDetailList();
-			Iterator<UserDetail> listIt = list.iterator();
-			if(listIt==null){
-				logger.info("List Empty");	
-			}
-			while (listIt.hasNext()) {
-				UserDetail ud = listIt.next();
-				logger.info("Data Entry Email:" + ud.getEmail());
-			}*/
-
-	}
-
-	@Test
-	public void runOnce() {
-		if (isInitialized)
-			return;
-		logger.info("Initializing database");
-
-		String script = "classpath:dbscripts/setup_data_queries.sql";
-		Resource resource = ctx.getResource(script);
-		JdbcTestUtils.executeSqlScript(template, resource, true);
-		isInitialized = true;
-	}
+        String script = "classpath:dbscripts/sms_test_public_users.sql";
+        Resource resource = ctx.getResource(script);
+        JdbcTestUtils.executeSqlScript(template, resource, true);
+        isInitialized = true;
+    }
 
 }
