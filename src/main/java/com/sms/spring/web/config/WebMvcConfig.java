@@ -80,6 +80,10 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/img/**").addResourceLocations("classpath:/static/img/");
 		registry.addResourceHandler("/font-awesome/**").addResourceLocations("classpath:/static/font-awesome/");
 		registry.addResourceHandler("/images/**").addResourceLocations("classpath:/static/images/");
+		registry.addResourceHandler("/img/**").addResourceLocations("classpath:/static/img/");
+		registry.addResourceHandler("/demo/**").addResourceLocations("classpath:/static/img/demo/");
+		registry.addResourceHandler("/gallery/**").addResourceLocations("classpath:/static/img/gallery/");
+		registry.addResourceHandler("/font-awesome/**").addResourceLocations("classpath:/static/font-awesome/");
 		registry.addResourceHandler("/datepicker/**").addResourceLocations("classpath:/static/datepicker/");
 		registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/");
 		registry.addResourceHandler("/pages/**").addResourceLocations("classpath:/static/pages/");
