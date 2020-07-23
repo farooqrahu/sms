@@ -60,10 +60,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/appProductTypeList", "/appProductCategoryList", "/appMaterialList",
 						"/appMaterialCompositionList", "/appTransportList", "/appBrandList", "/appWarehouseList",
 						"/appCustomerListBySalesRepCode", "/appPaymentMethodList", "/appOrderRequestList",
-						"/appCheckProductQuantity", "/appGetOrderRequestUpdate")
+						"/appCheckProductQuantity", "/appGetOrderRequestUpdate","/index**")
 				.permitAll()
 				
-				.and().authorizeRequests().antMatchers("/index**")
+				.and().authorizeRequests().antMatchers("/isss**")
 				.hasAnyRole("SMS_OWNER", "SALE_REP", "SALE_MANAGER", "DATA_ENTRY","WAREHOUSE_MANAGER")
 				
 				.and().authorizeRequests().antMatchers("/orderlist**")
