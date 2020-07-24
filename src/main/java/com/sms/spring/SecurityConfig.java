@@ -107,10 +107,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.failureUrl("/login?error").permitAll().and().logout().invalidateHttpSession(true)
 				.deleteCookies("JSESSIONID").logoutUrl("/logout").and().exceptionHandling()
 				.accessDeniedPage("/accessDenied");
-
-		http.sessionManagement().maximumSessions(1).expiredUrl("/login?expired").maxSessionsPreventsLogin(true)
-				.sessionRegistry(sessionRegistry()).and().invalidSessionUrl("/login?logout");
-
 	}
 
 	@Bean

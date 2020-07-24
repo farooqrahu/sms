@@ -3,17 +3,16 @@
  */
 package com.sms.spring.web.config;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Set;
-
-import com.sms.spring.model.Role;
+import com.sms.spring.domain.users.Role;
+import com.sms.spring.domain.users.User;
 import org.apache.log4j.Logger;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.sms.spring.model.User;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Set;
 
 /**
  * @author Farooq

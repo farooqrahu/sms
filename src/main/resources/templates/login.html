@@ -14,13 +14,10 @@
 </head>
 <body>
 <div id="loginbox">
-    	<span style="color: red; visibility: hidden" id="error">Caps
-				Lock is ON.</span>
-    <div style="color: red" th:if   ="${param.logout}">You have been
-        logged out.</div>
 
-    <div style="color: red" th:if="${param.error}">Invalid username
-        or password.</div>
+    <span class="alert alert-danger" style=" visibility: hidden" id="error">Caps Lock is ON.</span>
+    <div class="alert alert-danger" th:if="${param.logout}">You have been logged out.</div>
+    <div class="alert alert-danger" th:if="${param.error}">Invalid username or password.</div>
 
 
     <form class="form-vertical" th:action="@{/login}" method="post">

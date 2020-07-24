@@ -1,5 +1,8 @@
 package com.sms.spring.web.controller;
 
+import com.sms.spring.domain.users.Role;
+import com.sms.spring.domain.users.User;
+import com.sms.spring.service.AccountService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -8,10 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.sms.spring.model.Role;
-import com.sms.spring.model.User;
-import com.sms.spring.service.AccountService;
 
 @Controller
 public class IndexController {

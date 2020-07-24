@@ -1,12 +1,11 @@
 package com.sms.spring.viewmodel;
 
-import java.util.List;
-
+import com.sms.spring.domain.users.Role;
+import com.sms.spring.domain.users.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sms.spring.model.Role;
-import com.sms.spring.model.User;
+import java.util.List;
 
 @Component
 public class AccountViewModel {

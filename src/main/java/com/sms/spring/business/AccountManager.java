@@ -1,13 +1,10 @@
 package com.sms.spring.business;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.sms.spring.instrumentation.GlobalConstants;
 import com.sms.spring.instrumentation.Utility;
+import com.sms.spring.domain.users.Role;
+import com.sms.spring.domain.users.User;
+import com.sms.spring.service.AccountService;
 import com.sms.spring.service.RoleService;
 import com.sms.spring.viewmodel.AccountViewModel;
 import org.apache.log4j.Logger;
@@ -16,10 +13,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sms.spring.instrumentation.GlobalConstants;
-import com.sms.spring.model.Role;
-import com.sms.spring.model.User;
-import com.sms.spring.service.AccountService;
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 @Component
 public class AccountManager {
@@ -36,7 +34,7 @@ public class AccountManager {
 			logger.info("Save User Role:" + accountViewModel.getUser());
 			User user = new User();
 			// if existing user update fields.
-			if (accountViewModel.getUser().getId() != null) {
+			if (accountViewModel.getUser().getId()>0) {
 				user = accountService.findUserById(accountViewModel.getUser().getId());
 				user.setDesignation(accountViewModel.getUser().getDesignation());
 				user.setEmail(accountViewModel.getUser().getEmail());

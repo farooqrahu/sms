@@ -1,8 +1,9 @@
 package com.sms.spring.service;
 
-import java.util.Iterator;
-import java.util.List;
-
+import com.sms.spring.domain.users.repositories.UserRepository;
+import com.sms.spring.domain.users.Role;
+import com.sms.spring.domain.users.User;
+import com.sms.spring.web.config.SecurityUser;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,10 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.sms.spring.model.Role;
-import com.sms.spring.model.User;
-import com.sms.spring.repository.UserRepository;
-import com.sms.spring.web.config.SecurityUser;
+import java.util.Iterator;
+import java.util.List;
 @Service
 public class UserService implements UserDetailsService {
 	private static final Logger logger = Logger.getLogger(UserService.class);
@@ -82,7 +81,7 @@ public class UserService implements UserDetailsService {
 	}
 
 	public List<User> findAll() {
-		return userRepository.findAll();
+		return (List<User>) userRepository.findAll();
 	}
 
 

@@ -1,4 +1,4 @@
-package com.sms.spring.model;
+package com.sms.spring.domain.users;
 
 import javax.persistence.*;
 import java.io.Serializable;

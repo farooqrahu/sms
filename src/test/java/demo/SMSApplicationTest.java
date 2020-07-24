@@ -19,8 +19,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.jdbc.JdbcTestUtils;
 
 import com.sms.spring.SMSApplication;
-import com.sms.spring.model.Role;
-import com.sms.spring.model.User;
+import com.sms.spring.domain.users.Role;
+import com.sms.spring.domain.users.User;
 import com.sms.spring.service.RoleService;
 import com.sms.spring.service.UserService;
 

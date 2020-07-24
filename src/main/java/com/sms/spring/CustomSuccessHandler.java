@@ -1,14 +1,7 @@
 package com.sms.spring;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.sms.spring.instrumentation.Utility;
+import com.sms.spring.domain.users.User;
 import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,7 +10,12 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import com.sms.spring.model.User;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Farooq
@@ -89,7 +87,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 	}
 
 	private boolean isSaleManager(List<String> roles) {
-		if (roles.contains("ROLE_MANAGER")) {
+		if (roles.contains("ROLE_STUDENT")) {
 			return true;
 		}
 		return false;

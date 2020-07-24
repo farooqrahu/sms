@@ -29,7 +29,7 @@ public class SetupController {
     @RequestMapping(value = "/form-teacher", method = RequestMethod.GET)
     public ModelAndView teacher() {
         AccountViewModel accountviewModel = new AccountViewModel();
-        accountviewModel.setModelAndView(new ModelAndView("form-validation"));
+        accountviewModel.setModelAndView(new ModelAndView("form-teacher"));
         return accountviewModel.getModelAndView();
 
     }
@@ -37,7 +37,7 @@ public class SetupController {
     @RequestMapping(value = "/form-student", method = RequestMethod.GET)
     public ModelAndView student() {
         AccountViewModel accountviewModel = new AccountViewModel();
-        accountviewModel.setModelAndView(new ModelAndView("form-validation"));
+        accountviewModel.setModelAndView(new ModelAndView("form-student"));
         return accountviewModel.getModelAndView();
 
     }
@@ -45,28 +45,28 @@ public class SetupController {
     @RequestMapping(value = "/form-class", method = RequestMethod.GET)
     public ModelAndView stdClass() {
         AccountViewModel accountviewModel = new AccountViewModel();
-        accountviewModel.setModelAndView(new ModelAndView("form-validation"));
+        accountviewModel.setModelAndView(new ModelAndView("form-class"));
         return accountviewModel.getModelAndView();
 
     }
     @RequestMapping(value = "/form-marks", method = RequestMethod.GET)
     public ModelAndView marks() {
         AccountViewModel accountviewModel = new AccountViewModel();
-        accountviewModel.setModelAndView(new ModelAndView("form-validation"));
+        accountviewModel.setModelAndView(new ModelAndView("form-marks"));
         return accountviewModel.getModelAndView();
 
     }
     @RequestMapping(value = "/form-fee", method = RequestMethod.GET)
     public ModelAndView fee() {
         AccountViewModel accountviewModel = new AccountViewModel();
-        accountviewModel.setModelAndView(new ModelAndView("form-validation"));
+        accountviewModel.setModelAndView(new ModelAndView("form-fee"));
         return accountviewModel.getModelAndView();
 
     }
     @RequestMapping(value = "/form-non-teaching-staff", method = RequestMethod.GET)
     public ModelAndView nonTeachingStaff() {
         AccountViewModel accountviewModel = new AccountViewModel();
-        accountviewModel.setModelAndView(new ModelAndView("form-validation"));
+        accountviewModel.setModelAndView(new ModelAndView("form-non-teaching-staff"));
         return accountviewModel.getModelAndView();
 
     }

@@ -1,8 +1,9 @@
 package com.sms.spring.web.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.sms.spring.business.AccountManager;
+import com.sms.spring.instrumentation.GlobalConstants;
+import com.sms.spring.domain.users.Role;
+import com.sms.spring.domain.users.User;
 import com.sms.spring.viewmodel.AccountViewModel;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sms.spring.instrumentation.GlobalConstants;
-import com.sms.spring.model.Role;
-import com.sms.spring.model.User;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Farooq-Rahu

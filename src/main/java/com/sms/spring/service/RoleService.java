@@ -1,10 +1,9 @@
 package com.sms.spring.service;
 
+import com.sms.spring.domain.users.Role;
 import com.sms.spring.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.sms.spring.model.Role;
 
 @Service
 public class RoleService {

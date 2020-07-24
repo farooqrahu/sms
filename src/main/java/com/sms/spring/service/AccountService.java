@@ -1,16 +1,16 @@
 package com.sms.spring.service;
 
-import java.util.List;
-
-import com.sms.spring.repository.UserRepository;
+import com.sms.spring.domain.users.repositories.UserRepository;
+import com.sms.spring.domain.users.Role;
+import com.sms.spring.domain.users.User;
 import com.sms.spring.viewmodel.AccountViewModel;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sms.spring.model.Role;
-import com.sms.spring.model.User;
+import java.util.List;
+
 ;
 
 @Service
@@ -26,7 +26,7 @@ public class AccountService {
 
 	public AccountViewModel findAll() {
 		AccountViewModel model = new AccountViewModel();
-		model.setUserList(userRepository.findAll());
+		model.setUserList((List<User>) userRepository.findAll());
 		return model;
 
 	}
@@ -75,6 +75,6 @@ public class AccountService {
 		return userList;
 	}
 
-	
+
 
 }

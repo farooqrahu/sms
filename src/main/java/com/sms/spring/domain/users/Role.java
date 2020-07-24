@@ -1,19 +1,16 @@
-package com.sms.spring.model;
-
-import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+package com.sms.spring.domain.users;
 
 import org.springframework.stereotype.Component;
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import java.util.List;
 
 @Component
 @Entity
 @Table(name = "ROLES")
-public class Role extends BaseEntityAudit{
+public class Role extends BaseEntityAudit {
 
 	private String name;
 

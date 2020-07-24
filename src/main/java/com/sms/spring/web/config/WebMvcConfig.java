@@ -1,8 +1,5 @@
 package com.sms.spring.web.config;
 
-import java.io.IOException;
-import java.util.Locale;
-
 import com.sms.spring.SecurityConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
@@ -17,14 +14,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView;
 import org.springframework.web.servlet.view.jasperreports.JasperReportsViewResolver;
+
+import java.io.IOException;
+import java.util.Locale;
 
 @Configuration
 @ComponentScan(basePackages = { "com.sms.spring.web" })
